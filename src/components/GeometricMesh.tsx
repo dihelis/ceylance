@@ -3,10 +3,10 @@ import { useEffect, useRef } from "react";
 interface Node {
   x: number;
   y: number;
-  z: number;
+  originX: number;
+  originY: number;
   vx: number;
   vy: number;
-  vz: number;
 }
 
 const GeometricMesh = () => {
@@ -20,11 +20,8 @@ const GeometricMesh = () => {
     if (!ctx) return;
 
     let animationId: number;
-    const nodeCount = 80;
-    const connectionDistance = 180;
-    const mouseRadius = 200;
-    const depth = 400;
-    const fov = 600;
+    const connectionDistance = 140;
+    const mouseRadius = 180;
     const nodes: Node[] = [];
 
     const resize = () => {
@@ -37,97 +34,88 @@ const GeometricMesh = () => {
       nodes.length = 0;
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
-      for (let i = 0; i < nodeCount; i++) {
-        nodes.push({
-          x: (Math.random() - 0.5) * w,
-          y: (Math.random() - 0.5) * h,
-          z: Math.random() * depth,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          vz: (Math.random() - 0.5) * 0.3,
-        });
-      }
-    };
+      const spacing = 60;
+      const cols = Math.ceil(w / spacing) + 1;
+      const rows = Math.ceil(h / spacing) + 1;
 
-    const project = (node: Node, cx: number, cy: number) => {
-      const scale = fov / (fov + node.z);
-      return { x: node.x * scale + cx, y: node.y * scale + cy, scale };
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * spacing;
+          const y = row * spacing;
+          nodes.push({
+            x,
+            y,
+            originX: x,
+            originY: y,
+            vx: 0,
+            vy: 0,
+          });
+        }
+      }
     };
 
     const draw = () => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
-      const cx = w / 2;
-      const cy = h / 2;
       ctx.clearRect(0, 0, w, h);
 
       const mx = mouse.current.x;
       const my = mouse.current.y;
 
+      // Update positions
       for (const node of nodes) {
-        // Mouse repulsion in screen space
-        const p = project(node, cx, cy);
-        const dx = p.x - mx;
-        const dy = p.y - my;
+        const dx = node.x - mx;
+        const dy = node.y - my;
         const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Mouse repulsion
         if (dist < mouseRadius && dist > 0) {
-          const force = (1 - dist / mouseRadius) * 1.5;
+          const force = (1 - dist / mouseRadius) * 8;
           node.vx += (dx / dist) * force;
           node.vy += (dy / dist) * force;
         }
 
-        // Damping
-        node.vx *= 0.98;
-        node.vy *= 0.98;
-        node.vz *= 0.98;
+        // Spring back to origin
+        node.vx += (node.originX - node.x) * 0.05;
+        node.vy += (node.originY - node.y) * 0.05;
 
-        // Drift back
-        node.vx += -node.x * 0.00005;
-        node.vy += -node.y * 0.00005;
+        // Damping
+        node.vx *= 0.8;
+        node.vy *= 0.8;
 
         node.x += node.vx;
         node.y += node.vy;
-        node.z += node.vz;
-
-        const halfW = w * 0.6;
-        const halfH = h * 0.6;
-        if (node.x < -halfW || node.x > halfW) node.vx *= -1;
-        if (node.y < -halfH || node.y > halfH) node.vy *= -1;
-        if (node.z < 0) { node.z = 0; node.vz *= -1; }
-        if (node.z > depth) { node.z = depth; node.vz *= -1; }
       }
 
-      // Sort by z for proper layering
-      const sorted = [...nodes].sort((a, b) => b.z - a.z);
-      const projected = sorted.map(n => ({ ...project(n, cx, cy), node: n }));
-
       // Draw connections
-      for (let i = 0; i < projected.length; i++) {
-        for (let j = i + 1; j < projected.length; j++) {
-          const a = projected[i];
-          const b = projected[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connectionDistance) {
-            const avgScale = (a.scale + b.scale) / 2;
-            const alpha = (1 - dist / connectionDistance) * 0.3 * avgScale;
+            const alpha = (1 - dist / connectionDistance) * 0.2;
             ctx.strokeStyle = `hsla(174, 72%, 52%, ${alpha})`;
-            ctx.lineWidth = 0.6 * avgScale;
+            ctx.lineWidth = 0.6;
             ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.stroke();
           }
         }
       }
 
       // Draw nodes
-      for (const p of projected) {
-        const r = Math.max(1, 2.5 * p.scale);
-        const alpha = 0.3 + 0.5 * p.scale;
+      for (const node of nodes) {
+        const dx = node.x - mx;
+        const dy = node.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const proximity = Math.max(0, 1 - dist / mouseRadius);
+        const r = 1.5 + proximity * 2;
+        const alpha = 0.25 + proximity * 0.6;
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(174, 72%, 52%, ${alpha})`;
         ctx.fill();
       }
@@ -148,15 +136,16 @@ const GeometricMesh = () => {
     initNodes();
     draw();
 
+    const onResize = () => { resize(); initNodes(); };
     canvas.addEventListener("mousemove", handleMouse);
     canvas.addEventListener("mouseleave", handleLeave);
-    window.addEventListener("resize", () => { resize(); initNodes(); });
+    window.addEventListener("resize", onResize);
 
     return () => {
       cancelAnimationFrame(animationId);
       canvas.removeEventListener("mousemove", handleMouse);
       canvas.removeEventListener("mouseleave", handleLeave);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
