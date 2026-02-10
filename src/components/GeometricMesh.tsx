@@ -63,8 +63,8 @@ const GeometricMesh = () => {
             proximity = 1 - dist / mouseRadius;
           }
 
-          const r = 1 + proximity * 1.5;
-          const alpha = 0.2 + proximity * 0.6;
+          const r = 1.2 + proximity * 1.5;
+          const alpha = 0.45 + proximity * 0.5;
 
           ctx.beginPath();
           ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -101,7 +101,7 @@ const GeometricMesh = () => {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.7 }}
+      style={{ opacity: 0.85 }}
     />
   );
 };
