@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
 import GeometricMesh from "@/components/GeometricMesh";
 
 const HeroSection = () => {
@@ -10,12 +9,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-30"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
       <GeometricMesh />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/60 to-background" />
 
       <div className="relative z-10 container mx-auto px-6 pt-24 pb-20 text-center">
         <motion.div
