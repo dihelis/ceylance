@@ -36,12 +36,18 @@ const services = [
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 40, scale: 0.95, filter: "blur(8px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
 };
 
 const ServicesSection = () => (
@@ -68,11 +74,12 @@ const ServicesSection = () => (
           <motion.div
             key={s.title}
             variants={item}
+            whileHover={{ y: -6, transition: { duration: 0.25 } }}
             className="group p-8 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors"
             style={{ boxShadow: "var(--shadow-card)" }}
           >
-            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-              <s.icon className="text-primary" size={24} />
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
+              <s.icon className="text-primary transition-transform duration-300 group-hover:rotate-6" size={24} />
             </div>
             <h3 className="font-display text-xl font-semibold mb-3">{s.title}</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">{s.description}</p>
