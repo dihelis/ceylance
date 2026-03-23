@@ -60,7 +60,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Ceylance Website <hello@ceylance.com>',
+        from: 'Ceylance Website <onboarding@resend.dev>',
         to: recipients,
         reply_to: email,
         subject: `New enquiry from ${name}${company ? ` (${company})` : ''}`,
