@@ -1,12 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, ArrowRight, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const [submitted, setSubmitted] = useState(false);
