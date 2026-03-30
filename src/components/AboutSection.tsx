@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Download, ExternalLink } from "lucide-react";
 
 const stats = [
   { value: "50+", label: "Projects Delivered" },
@@ -43,6 +43,25 @@ const AboutSection = () => (
                 <span className="text-sm text-foreground">{r}</span>
               </div>
             ))}
+          </div>
+          <div className="flex flex-wrap gap-3 mt-8">
+            <a
+              href="/ceylance-brochure.pdf"
+              download
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+            >
+              <Download size={16} />
+              Download Brochure
+            </a>
+            <a
+              href="/ceylance-brochure.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold text-sm hover:border-primary/50 transition-colors"
+            >
+              <ExternalLink size={16} />
+              View Brochure
+            </a>
           </div>
         </motion.div>
 
