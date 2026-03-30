@@ -57,21 +57,6 @@ const GradientMesh = () => {
         ctx.fillRect(0, 0, w, h);
       }
 
-      // Subtle noise grain overlay via compositing
-      ctx.globalCompositeOperation = "overlay";
-      const imgData = ctx.createImageData(w, h);
-      const pixels = imgData.data;
-      // Sparse grain — only set every 4th pixel for performance
-      for (let i = 0; i < pixels.length; i += 16) {
-        const v = Math.random() * 255;
-        pixels[i] = v;
-        pixels[i + 1] = v;
-        pixels[i + 2] = v;
-        pixels[i + 3] = 8; // very subtle
-      }
-      ctx.putImageData(imgData, 0, 0);
-      ctx.globalCompositeOperation = "source-over";
-
       animationId = requestAnimationFrame(draw);
     };
 
