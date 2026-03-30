@@ -94,16 +94,28 @@ const GradientMesh = () => {
       mouse.current = { x: -9999, y: -9999 };
     };
 
+    const handleTouch = (e: TouchEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      if (touch) {
+        mouse.current = { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+      }
+    };
+
     resize();
     draw();
 
     canvas.addEventListener("mousemove", handleMouse);
     canvas.addEventListener("mouseleave", handleLeave);
+    canvas.addEventListener("touchmove", handleTouch, { passive: true });
+    canvas.addEventListener("touchend", handleLeave);
     window.addEventListener("resize", resize);
     return () => {
       cancelAnimationFrame(animationId);
       canvas.removeEventListener("mousemove", handleMouse);
       canvas.removeEventListener("mouseleave", handleLeave);
+      canvas.removeEventListener("touchmove", handleTouch);
+      canvas.removeEventListener("touchend", handleLeave);
       window.removeEventListener("resize", resize);
     };
   }, []);
