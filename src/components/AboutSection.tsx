@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Download, ExternalLink } from "lucide-react";
 
 const stats = [
   { value: "50+", label: "Projects Delivered" },
