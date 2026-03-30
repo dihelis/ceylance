@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import GeometricMesh from "@/components/GeometricMesh";
+import GradientMesh from "@/components/GradientMesh";
 const HeroSection = () => {
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({
@@ -8,8 +8,8 @@ const HeroSection = () => {
     });
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <GeometricMesh />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/60 to-background" />
+      <GradientMesh />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
 
       <div className="relative z-10 container mx-auto px-6 pt-24 pb-20 text-center">
         <motion.div initial={{
