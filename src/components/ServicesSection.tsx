@@ -75,9 +75,7 @@ const ServicesSection = () => <section id="services" className="py-28 bg-backgro
         transition: {
           duration: 0.25
         }
-      }} className="group p-8 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors" style={{
-        boxShadow: "var(--shadow-card)"
-      }}>
+      }} className="group p-8 rounded-xl glass glass-hover">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
               <s.icon className="text-primary transition-transform duration-300 group-hover:rotate-6" size={24} />
             </div>

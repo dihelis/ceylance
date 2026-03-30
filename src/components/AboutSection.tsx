@@ -78,8 +78,7 @@ const AboutSection = () => {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="p-6 rounded-xl bg-card border border-border text-center"
-                  style={{ boxShadow: "var(--shadow-card)" }}
+                  className="p-6 rounded-xl glass glass-hover text-center"
                 >
                   <p className="font-display text-3xl font-bold text-primary mb-1">{s.value}</p>
                   <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>

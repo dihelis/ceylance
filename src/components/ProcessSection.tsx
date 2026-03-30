@@ -74,8 +74,7 @@ const ProcessSection = () => (
               scale: 1.02,
               transition: { duration: 0.3, ease: "easeOut" },
             }}
-            className="group relative p-8 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors overflow-hidden"
-            style={{ boxShadow: "var(--shadow-card)" }}
+            className="group relative p-8 rounded-xl glass glass-hover overflow-hidden"
           >
             {/* Animated gradient accent on hover */}
             <motion.div
