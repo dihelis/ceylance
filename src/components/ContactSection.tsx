@@ -23,8 +23,14 @@ const ContactSection = () => {
     setLoading(true);
     setError(null);
     try {
-      const { error: fnError } = await supabase.functions.invoke("send-contact-email", {
-        body: formData,
+      const id = crypto.randomUUID();
+      const { error: fnError } = await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "contact-notification",
+          recipientEmail: "hello@ceylance.com",
+          idempotencyKey: `contact-notify-${id}`,
+          templateData: formData,
+        },
       });
       if (fnError) throw fnError;
       setSubmitted(true);
