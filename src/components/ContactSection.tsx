@@ -40,11 +40,7 @@ const ContactSection = () => {
     <section id="contact" className="py-28 bg-secondary/30">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">Get in Touch</p>
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
               Let's Build
@@ -52,8 +48,8 @@ const ContactSection = () => {
               <span className="text-gradient">Something Great</span>
             </h2>
             <p className="text-muted-foreground mb-10 leading-relaxed">
-              Whether you're launching a new product or modernising existing systems,
-              we'd love to hear about your project.
+              Whether you're launching a new product or modernising existing systems, we'd love to hear about your
+              project.
             </p>
             <div className="space-y-5">
               <div className="flex items-center gap-4">
@@ -72,16 +68,12 @@ const ContactSection = () => {
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                   <MapPin className="text-primary" size={18} />
                 </div>
-                <span className="text-foreground text-sm">6/89 Edward Street, Norwood SA 5067</span>
+                <span className="text-foreground text-sm">Norwood SA 5067</span>
               </div>
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             {submitted ? (
               <div className="h-full flex items-center justify-center rounded-xl bg-card border border-border p-12 text-center">
                 <div>
@@ -135,9 +127,7 @@ const ContactSection = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
                 />
-                {error && (
-                  <p className="text-sm text-destructive">{error}</p>
-                )}
+                {error && <p className="text-sm text-destructive">{error}</p>}
                 <button
                   type="submit"
                   disabled={loading}
