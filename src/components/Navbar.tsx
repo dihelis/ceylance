@@ -1,27 +1,34 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const sectionLinks = ["Services", "Process", "Contact"];
 const pageLinks = [{ label: "About Us", href: "/about" }];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const scrollTo = (id: string) => {
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    if (location.pathname !== "/") {
+      navigate("/#" + id.toLowerCase());
+    } else {
+      document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    }
     setOpen(false);
   };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-6">
-        <a href="#" className="font-display text-xl font-bold tracking-tight text-foreground">
+        <a href="/" className="font-display text-xl font-bold tracking-tight text-foreground">
           Ceylance<span className="text-primary">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {sectionLinks.map((link) => (
             <button
               key={link}
               onClick={() => scrollTo(link)}
@@ -29,6 +36,15 @@ const Navbar = () => {
             >
               {link}
             </button>
+          ))}
+          {pageLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </a>
           ))}
           <button
             onClick={() => scrollTo("Contact")}
@@ -52,7 +68,7 @@ const Navbar = () => {
             className="md:hidden overflow-hidden bg-background border-b border-border"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {sectionLinks.map((link) => (
                 <button
                   key={link}
                   onClick={() => scrollTo(link)}
@@ -60,6 +76,15 @@ const Navbar = () => {
                 >
                   {link}
                 </button>
+              ))}
+              {pageLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-left text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </a>
               ))}
             </div>
           </motion.div>
