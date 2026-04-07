@@ -32,7 +32,7 @@ const Navbar = () => {
             <button
               key={link}
               onClick={() => scrollTo(link)}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
             >
               {link}
             </button>
@@ -41,7 +41,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
             >
               {link.label}
             </a>
@@ -72,7 +72,7 @@ const Navbar = () => {
                 <button
                   key={link}
                   onClick={() => scrollTo(link)}
-                  className="text-left text-muted-foreground hover:text-primary transition-colors"
+                  className="text-left font-medium text-primary hover:text-primary/80 transition-colors"
                 >
                   {link}
                 </button>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-left text-muted-foreground hover:text-primary transition-colors"
+                  className="text-left font-medium text-primary hover:text-primary/80 transition-colors"
                 >
                   {link.label}
                 </a>
