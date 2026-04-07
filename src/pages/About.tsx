@@ -175,7 +175,7 @@ const About = () => {
       </section>
 
       {/* Industries We Serve */}
-      <section className="py-28">
+      <section className="py-28 overflow-hidden">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -191,35 +191,63 @@ const About = () => {
               We bring deep domain knowledge across a wide range of sectors.
             </p>
           </motion.div>
+        </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[
-              { icon: HeartPulse, name: "Healthcare" },
-              { icon: ShoppingCart, name: "Retail" },
-              { icon: Building2, name: "Hospitality" },
-              { icon: HeartPulse, name: "Wellness" },
-              { icon: Truck, name: "Fashion & Textile" },
-              { icon: Truck, name: "Automotive" },
-              { icon: Truck, name: "Logistics" },
-              { icon: Building2, name: "Manufacturing" },
-              { icon: Landmark, name: "Real Estate" },
-              { icon: GraduationCap, name: "Education" },
-              { icon: Building2, name: "Telecommunication" },
-            ].map((industry, i) => (
-              <motion.div
-                key={industry.name}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="p-5 rounded-xl glass glass-hover text-center"
-              >
-                <div className="inline-flex p-2.5 rounded-lg bg-primary/10 mb-3">
-                  <industry.icon className="text-primary" size={20} />
-                </div>
-                <p className="text-sm font-medium text-foreground">{industry.name}</p>
-              </motion.div>
+        {/* Marquee row 1 */}
+        <div className="relative w-full">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+          <div className="flex gap-4 animate-marquee">
+            {[...Array(2)].map((_, dupeIdx) => (
+              <div key={dupeIdx} className="flex gap-4 shrink-0">
+                {[
+                  { icon: HeartPulse, name: "Healthcare" },
+                  { icon: ShoppingCart, name: "Retail" },
+                  { icon: Building2, name: "Hospitality" },
+                  { icon: HeartPulse, name: "Wellness" },
+                  { icon: Truck, name: "Fashion & Textile" },
+                  { icon: Truck, name: "Automotive" },
+                ].map((industry) => (
+                  <div
+                    key={`${dupeIdx}-${industry.name}`}
+                    className="flex items-center gap-3 px-6 py-4 rounded-xl glass shrink-0"
+                  >
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <industry.icon className="text-primary" size={18} />
+                    </div>
+                    <span className="text-sm font-medium text-foreground whitespace-nowrap">{industry.name}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Marquee row 2 (reverse) */}
+        <div className="relative w-full mt-4">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+          <div className="flex gap-4 animate-marquee-reverse">
+            {[...Array(2)].map((_, dupeIdx) => (
+              <div key={dupeIdx} className="flex gap-4 shrink-0">
+                {[
+                  { icon: Truck, name: "Logistics" },
+                  { icon: Building2, name: "Manufacturing" },
+                  { icon: Landmark, name: "Real Estate" },
+                  { icon: GraduationCap, name: "Education" },
+                  { icon: Building2, name: "Telecommunication" },
+                ].map((industry) => (
+                  <div
+                    key={`${dupeIdx}-${industry.name}`}
+                    className="flex items-center gap-3 px-6 py-4 rounded-xl glass shrink-0"
+                  >
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <industry.icon className="text-primary" size={18} />
+                    </div>
+                    <span className="text-sm font-medium text-foreground whitespace-nowrap">{industry.name}</span>
+                  </div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
