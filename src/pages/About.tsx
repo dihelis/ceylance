@@ -174,6 +174,57 @@ const About = () => {
         </div>
       </section>
 
+      {/* Industries We Serve */}
+      <section className="py-28">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">Industries</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+              Industries We <span className="text-gradient">Serve</span>
+            </h2>
+            <p className="max-w-2xl mx-auto text-muted-foreground">
+              We bring deep domain knowledge across a wide range of sectors.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { icon: HeartPulse, name: "Healthcare" },
+              { icon: ShoppingCart, name: "Retail" },
+              { icon: Building2, name: "Hospitality" },
+              { icon: HeartPulse, name: "Wellness" },
+              { icon: Truck, name: "Fashion & Textile" },
+              { icon: Truck, name: "Automotive" },
+              { icon: Truck, name: "Logistics" },
+              { icon: Building2, name: "Manufacturing" },
+              { icon: Landmark, name: "Real Estate" },
+              { icon: GraduationCap, name: "Education" },
+              { icon: Building2, name: "Telecommunication" },
+            ].map((industry, i) => (
+              <motion.div
+                key={industry.name}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="p-5 rounded-xl glass glass-hover text-center"
+              >
+                <div className="inline-flex p-2.5 rounded-lg bg-primary/10 mb-3">
+                  <industry.icon className="text-primary" size={20} />
+                </div>
+                <p className="text-sm font-medium text-foreground">{industry.name}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Case Studies */}
       <section className="py-28">
         <div className="container mx-auto px-6">
