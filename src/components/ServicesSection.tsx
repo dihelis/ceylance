@@ -66,7 +66,10 @@ const ServicesSection = () => <section id="services" className="py-28 bg-backgro
       once: true
     }} className="text-center mb-16">
         <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">WHAT WE ARE THE BEST AT</p>
-        <h2 className="font-display text-4xl md:text-5xl font-bold">Our Services</h2>
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
+        <Link to="/about#case-studies" className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:opacity-80 transition-opacity">
+          View our case studies <ArrowRight size={14} />
+        </Link>
       </motion.div>
 
       <motion.div variants={container} initial="hidden" whileInView="show" viewport={{
