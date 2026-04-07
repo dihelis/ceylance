@@ -168,7 +168,7 @@ const About = () => {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
               >
                 <Eye size={15} />
-                View Brochure
+                Company Profile
               </button>
               <a
                 href="/ceylance-brochure.pdf"
