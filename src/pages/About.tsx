@@ -112,65 +112,74 @@ const About = () => {
       </section>
 
       {/* About Detail */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-16 bg-secondary/30">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
-                From AI-driven solutions to scalable SaaS platforms, we deliver digital products that drive <span className="text-gradient">real results</span>.
-              </h2>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                We combine deep technical expertise with genuine business understanding. Every engagement
-                starts with listening — understanding your goals, constraints, and users — so we can
-                architect solutions that truly move the needle.
-              </p>
-              <div className="space-y-4">
-                {reasons.map((r) => (
-                  <div key={r} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-primary mt-0.5 shrink-0" size={18} />
-                    <span className="text-sm text-foreground">{r}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-3 mt-8">
-                <button
-                  onClick={() => setShowViewer(true)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
-                >
-                  <Eye size={16} />
-                  View Brochure
-                </button>
-                <a
-                  href="/ceylance-brochure.pdf"
-                  download
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold text-sm hover:border-primary/50 transition-colors"
-                >
-                  <Download size={16} />
-                  Download Brochure
-                </a>
-              </div>
-            </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-10"
+          >
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              From AI-driven solutions to scalable SaaS platforms, we deliver digital products that drive <span className="text-gradient">real results</span>.
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              We combine deep technical expertise with genuine business understanding. Every engagement
+              starts with listening — understanding your goals, constraints, and users — so we can
+              architect solutions that truly move the needle.
+            </p>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-2 gap-5"
-            >
-              {stats.map((s) => (
-                <div key={s.label} className="p-6 rounded-xl glass glass-hover text-center">
-                  <p className="font-display text-3xl font-bold text-primary mb-1">{s.value}</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
+          {/* Stats bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10"
+          >
+            {stats.map((s) => (
+              <div key={s.label} className="p-4 rounded-xl glass text-center">
+                <p className="font-display text-2xl font-bold text-primary">{s.value}</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Reasons + CTA row */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-xl glass"
+          >
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {reasons.map((r) => (
+                <div key={r} className="flex items-center gap-2">
+                  <CheckCircle2 className="text-primary shrink-0" size={15} />
+                  <span className="text-sm text-foreground">{r}</span>
                 </div>
               ))}
-            </motion.div>
-          </div>
+            </div>
+            <div className="flex gap-3 shrink-0">
+              <button
+                onClick={() => setShowViewer(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+              >
+                <Eye size={15} />
+                View Brochure
+              </button>
+              <a
+                href="/ceylance-brochure.pdf"
+                download
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-foreground font-semibold text-sm hover:border-primary/50 transition-colors"
+              >
+                <Download size={15} />
+                Download
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
