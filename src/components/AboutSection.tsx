@@ -37,9 +37,9 @@ const AboutSection = () => {
                 <span className="text-gradient">You Can Trust</span>
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                Ceylance is a boutique software consultancy helping businesses across Australia and the
-                United Kingdom harness the power of modern technology. From AI-driven solutions to
-                scalable SaaS platforms, we deliver digital products that drive real results.
+                Ceylance is a boutique software consultancy helping businesses across Australia and the United Kingdom
+                harness the power of modern technology. From AI-driven solutions to scalable SaaS platforms, we deliver
+                digital products that drive real results.
               </p>
               <div className="space-y-4">
                 {reasons.map((r) => (
@@ -55,7 +55,7 @@ const AboutSection = () => {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
                 >
                   <Eye size={16} />
-                  View Brochure
+                  Company Profile
                 </button>
                 <a
                   href="/ceylance-brochure.pdf"
@@ -63,7 +63,7 @@ const AboutSection = () => {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold text-sm hover:border-primary/50 transition-colors"
                 >
                   <Download size={16} />
-                  Download Brochure
+                  Download Profile
                 </a>
               </div>
             </motion.div>
@@ -76,10 +76,7 @@ const AboutSection = () => {
               className="grid grid-cols-2 gap-5"
             >
               {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="p-6 rounded-xl glass glass-hover text-center"
-                >
+                <div key={s.label} className="p-6 rounded-xl glass glass-hover text-center">
                   <p className="font-display text-3xl font-bold text-primary mb-1">{s.value}</p>
                   <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
                 </div>
@@ -126,11 +123,7 @@ const AboutSection = () => {
                   </button>
                 </div>
               </div>
-              <iframe
-                src="/ceylance-brochure.pdf"
-                className="w-full h-[calc(85vh-48px)]"
-                title="Ceylance Brochure"
-              />
+              <iframe src="/ceylance-brochure.pdf" className="w-full h-[calc(85vh-48px)]" title="Ceylance Brochure" />
             </motion.div>
           </motion.div>
         )}
