@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const stats = [
   { value: "50+", label: "Projects Delivered" },
@@ -79,6 +80,11 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="About Ceylance — Australian Software Consulting Company"
+        description="Learn about Ceylance, an Australia-based software consultancy delivering AI, SaaS, web, and mobile solutions for businesses across AU, UK, and UAE."
+        canonical="https://www.ceylance.com/about"
+      />
       <Navbar />
 
       {/* Hero */}
