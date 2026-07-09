@@ -202,24 +202,93 @@ const ServicesSection = () => (
         </a>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {services.map((s, i) => (
-          <motion.div
-            key={s.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ y: -6 }}
-            className="group p-8 bg-secondary-foreground/[0.04] border border-secondary-foreground/10 hover:border-primary/50 transition-colors"
-          >
-            <div className="w-11 h-11 bg-primary/15 flex items-center justify-center mb-6">
-              <s.icon className="text-primary" size={20} />
-            </div>
-            <h4 className="font-display text-xl font-medium tracking-[-0.02em] mb-3">{s.title}</h4>
-            <p className="text-sm text-secondary-foreground/60 leading-relaxed">{s.desc}</p>
-          </motion.div>
-        ))}
+      <div className="border border-secondary-foreground/10 overflow-hidden">
+        <table className="w-full text-left border-collapse hidden md:table">
+          <thead>
+            <tr className="bg-primary/10 border-b border-secondary-foreground/10 text-[10px] font-mono uppercase tracking-[0.15em] text-secondary-foreground/70">
+              <th className="p-5 font-normal">Outcome</th>
+              <th className="p-5 font-normal">Best for</th>
+              <th className="p-5 font-normal">What you get</th>
+              <th className="p-5 font-normal">Timeline</th>
+              <th className="p-5 font-normal text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {packages.map((p, i) => (
+              <motion.tr
+                key={p.outcome}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06, duration: 0.5 }}
+                className="border-b border-secondary-foreground/10 hover:border-primary/50 transition-colors group"
+              >
+                <td className="p-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-primary/15 flex items-center justify-center shrink-0">
+                      <p.icon className="text-primary" size={18} />
+                    </div>
+                    <span className="font-display text-lg font-medium tracking-[-0.02em]">{p.outcome}</span>
+                  </div>
+                </td>
+                <td className="p-5 text-sm text-secondary-foreground/60 leading-relaxed">{p.bestFor}</td>
+                <td className="p-5 text-sm text-secondary-foreground/80 leading-relaxed">{p.includes}</td>
+                <td className="p-5 text-sm font-mono text-secondary-foreground/70">{p.timeline}</td>
+                <td className="p-5 text-right">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center w-10 h-10 bg-secondary-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors"
+                  >
+                    <ArrowUpRight size={16} strokeWidth={2.5} />
+                  </a>
+                </td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Mobile card stack */}
+        <div className="md:hidden flex flex-col divide-y divide-secondary-foreground/10">
+          {packages.map((p, i) => (
+            <motion.div
+              key={p.outcome}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06, duration: 0.5 }}
+              className="p-5 bg-secondary-foreground/[0.02] hover:bg-secondary-foreground/[0.04] transition-colors"
+            >
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-primary/15 flex items-center justify-center shrink-0">
+                    <p.icon className="text-primary" size={18} />
+                  </div>
+                  <h4 className="font-display text-lg font-medium tracking-[-0.02em]">{p.outcome}</h4>
+                </div>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center w-10 h-10 bg-secondary-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors"
+                >
+                  <ArrowUpRight size={16} strokeWidth={2.5} />
+                </a>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-secondary-foreground/50 mb-1">Best for</p>
+                  <p className="text-secondary-foreground/60 leading-relaxed">{p.bestFor}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-secondary-foreground/50 mb-1">What you get</p>
+                  <p className="text-secondary-foreground/80 leading-relaxed">{p.includes}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-secondary-foreground/50 mb-1">Timeline</p>
+                  <p className="font-mono text-secondary-foreground/70">{p.timeline}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
