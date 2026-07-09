@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
-import logoAsset from "@/assets/ceylance-logo.jpg.asset.json";
+import logoUrl from "@/assets/ceylance-logo.png";
 
 const sectionLinks = ["Services", "Process", "Contact"];
 const pageLinks = [{ label: "About", href: "/about" }];
@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+    <nav className="absolute top-0 left-0 right-0 z-50 pointer-events-none">
       <div className="px-6 md:px-10 py-6 flex items-start justify-between">
         {/* Left — stacked links */}
         <div className="hidden md:flex flex-col gap-1 text-sm font-medium text-foreground/90 pointer-events-auto">
@@ -53,10 +53,9 @@ const Navbar = () => {
           className="pointer-events-auto flex items-center"
         >
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt="Ceylance"
             className="h-6 md:h-7 w-auto"
-            style={{ mixBlendMode: "screen" }}
           />
         </a>
 
