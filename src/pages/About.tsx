@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Download, Eye, ArrowRight, Building2, ShoppingCart, HeartPulse, GraduationCap, Landmark, Truck } from "lucide-react";
+import { CheckCircle2, Download, Eye, ArrowUpRight, Building2, ShoppingCart, HeartPulse, GraduationCap, Landmark, Truck } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
@@ -88,48 +88,59 @@ const About = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-32 pb-20">
-        <div className="container mx-auto px-6 text-center">
+      <section className="relative pt-40 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-plus-pattern opacity-40 pointer-events-none" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at 50% 30%, transparent 0%, hsl(var(--background)) 75%)" }}
+        />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-10">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-primary text-sm font-medium tracking-widest uppercase mb-3"
+            className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6"
           >
-            About Ceylance
+            [ About Ceylance ]
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-display text-4xl md:text-6xl font-bold mb-6"
+            transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-[11vw] md:text-[6.5vw] leading-[0.95] tracking-[-0.045em] font-medium max-w-6xl"
           >
-            Technology Partners <span className="text-gradient">You Can Trust</span>
+            A boutique studio <br />
+            <span className="text-foreground/40">for AI-native operators.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="max-w-2xl mx-auto text-lg text-muted-foreground"
+            className="mt-10 max-w-xl text-base md:text-lg text-foreground/70 leading-relaxed"
           >
-            Ceylance is a boutique software consultancy helping businesses across Australia and the
-            United Kingdom harness the power of modern technology.
+            Ceylance helps businesses across Australia, the UK and UAE design, build and ship
+            intelligent software — embedded with founders, obsessed with outcomes.
           </motion.p>
         </div>
       </section>
 
       {/* About Detail */}
-      <section className="py-16 bg-secondary/30">
+      <section className="relative py-24 border-t border-border">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-10"
+            className="max-w-4xl mb-14"
           >
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              From AI-driven solutions to scalable SaaS platforms, we deliver digital products that drive <span className="text-gradient">real results</span>.
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">
+              [ Our approach ]
+            </p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium mb-6">
+              From AI-driven solutions to scalable SaaS platforms —{" "}
+              <span className="text-foreground/40">we ship products that move the needle.</span>
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-foreground/60 leading-relaxed max-w-2xl">
               We combine deep technical expertise with genuine business understanding. Every engagement
               starts with listening — understanding your goals, constraints, and users — so we can
               architect solutions that truly move the needle.
@@ -142,12 +153,12 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
           >
             {stats.map((s) => (
-              <div key={s.label} className="p-4 rounded-xl glass text-center">
-                <p className="font-display text-2xl font-bold text-primary">{s.value}</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
+              <div key={s.label} className="p-6 rounded-3xl bg-muted/50 border border-border">
+                <p className="font-display text-3xl md:text-4xl font-medium tracking-[-0.03em] text-foreground">{s.value}</p>
+                <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50">{s.label}</p>
               </div>
             ))}
           </motion.div>
@@ -158,7 +169,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-xl glass"
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-8 rounded-3xl bg-muted/50 border border-border"
           >
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               {reasons.map((r) => (
@@ -171,7 +182,7 @@ const About = () => {
             <div className="flex gap-3 shrink-0">
               <button
                 onClick={() => setShowViewer(true)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Eye size={15} />
                 Company Profile
@@ -179,7 +190,7 @@ const About = () => {
               <a
                 href="/ceylance-brochure.pdf"
                 download
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-foreground font-semibold text-sm hover:border-primary/50 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-foreground font-medium text-sm hover:border-primary/50 transition-colors"
               >
                 <Download size={15} />
                 Download
@@ -190,21 +201,18 @@ const About = () => {
       </section>
 
       {/* Industries We Serve */}
-      <section className="py-28 overflow-hidden">
+      <section className="py-28 overflow-hidden border-t border-border">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="max-w-4xl mb-16"
           >
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">Industries</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-              Industries We <span className="text-gradient">Serve</span>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">[ Industries ]</p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium mb-4">
+              Deep domain knowledge <span className="text-foreground/40">across sectors.</span>
             </h2>
-            <p className="max-w-2xl mx-auto text-muted-foreground">
-              We bring deep domain knowledge across a wide range of sectors.
-            </p>
           </motion.div>
         </div>
 
@@ -225,7 +233,7 @@ const About = () => {
                 ].map((industry) => (
                   <div
                     key={`${dupeIdx}-${industry.name}`}
-                    className="flex items-center gap-3 px-6 py-4 rounded-xl glass shrink-0"
+                    className="flex items-center gap-3 px-6 py-4 rounded-full bg-muted/50 border border-border shrink-0"
                   >
                     <div className="p-2 rounded-lg bg-primary/10">
                       <industry.icon className="text-primary" size={18} />
@@ -254,7 +262,7 @@ const About = () => {
                 ].map((industry) => (
                   <div
                     key={`${dupeIdx}-${industry.name}`}
-                    className="flex items-center gap-3 px-6 py-4 rounded-xl glass shrink-0"
+                    className="flex items-center gap-3 px-6 py-4 rounded-full bg-muted/50 border border-border shrink-0"
                   >
                     <div className="p-2 rounded-lg bg-primary/10">
                       <industry.icon className="text-primary" size={18} />
@@ -269,21 +277,18 @@ const About = () => {
       </section>
 
       {/* Case Studies */}
-      <section id="case-studies" className="py-28">
+      <section id="case-studies" className="py-28 border-t border-border">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="max-w-4xl mb-16"
           >
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">Case Studies</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-              Proven Results Across <span className="text-gradient">Industries</span>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">[ Case studies ]</p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium mb-4">
+              Proven results <span className="text-foreground/40">across industries.</span>
             </h2>
-            <p className="max-w-2xl mx-auto text-muted-foreground">
-              A selection of projects where we've helped businesses transform their operations through technology.
-            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -295,25 +300,26 @@ const About = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="group p-6 rounded-xl glass glass-hover flex flex-col"
+                whileHover={{ y: -6 }}
+                className="group p-7 rounded-3xl bg-muted/50 border border-border hover:border-primary/40 transition-colors flex flex-col"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-lg bg-primary/10">
+                  <div className="p-2 rounded-full bg-primary/10">
                     <study.icon className="text-primary" size={20} />
                   </div>
-                  <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-primary">
                     {study.industry}
                   </span>
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                <h3 className="font-display text-xl font-medium tracking-[-0.02em] text-foreground mb-3">
                   {study.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-5 flex-1">{study.summary}</p>
+                <p className="text-sm text-foreground/60 leading-relaxed mb-5 flex-1">{study.summary}</p>
                 <div className="flex flex-wrap gap-2">
                   {study.results.map((r) => (
                     <span
                       key={r}
-                      className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium"
+                      className="text-[11px] px-3 py-1 rounded-full bg-primary/10 text-primary font-medium"
                     >
                       {r}
                     </span>
@@ -326,25 +332,29 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-6 text-center">
+      <section className="relative py-32 border-t border-border overflow-hidden">
+        <div className="absolute inset-0 bg-plus-pattern opacity-30 pointer-events-none" />
+        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Ready to be our next <span className="text-gradient">success story</span>?
+            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-[-0.045em] font-medium mb-6">
+              Ready to be our next <br /><span className="text-foreground/40">success story?</span>
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+            <p className="text-foreground/60 mb-10 max-w-lg mx-auto">
               Let's discuss how we can help your business achieve similar results.
             </p>
             <a
               href="/#contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 pl-6 pr-2 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors group"
             >
-              Get in Touch
-              <ArrowRight size={16} />
+              Get in touch
+              <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-transform group-hover:rotate-45">
+                <ArrowUpRight size={16} strokeWidth={2.5} />
+              </span>
             </a>
           </motion.div>
         </div>
