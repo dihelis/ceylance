@@ -16,15 +16,16 @@ type Chip = {
 };
 
 const chips: Chip[] = [
-  { label: "AI Engineer",       bg: "#F45A2E", fg: "#0a0a0a", x: "8%",  y: "6%",  rotate: -6, delay: 0.05 },
-  { label: "LLM Ops",           bg: "#111111", fg: "#f5f5f0", x: "38%", y: "0%",  rotate: 3,  delay: 0.15 },
-  { label: "Product Designer",  bg: "#FFB4C4", fg: "#0a0a0a", x: "68%", y: "8%",  rotate: -4, delay: 0.25 },
-  { label: "SaaS Architect",    bg: "#FFD86E", fg: "#0a0a0a", x: "82%", y: "32%", rotate: 6,  delay: 0.35 },
-  { label: "Mobile Engineer",   bg: "#7B5CFF", fg: "#f5f5f0", x: "5%",  y: "42%", rotate: 4,  delay: 0.45 },
-  { label: "3D / Motion",       bg: "#00C48C", fg: "#0a0a0a", x: "72%", y: "62%", rotate: -8, delay: 0.55 },
-  { label: "Web Developer",     bg: "#3B82F6", fg: "#f5f5f0", x: "22%", y: "72%", rotate: 5,  delay: 0.65 },
-  { label: "Automation Ops",    bg: "#F45A2E", fg: "#0a0a0a", x: "50%", y: "80%", rotate: -3, delay: 0.75 },
-  { label: "Creative Director", bg: "#E85A9A", fg: "#0a0a0a", x: "88%", y: "78%", rotate: 8,  delay: 0.85 },
+  // Teal-anchored palette (brand) with tonal supporting hues
+  { label: "AI Engineer",       bg: "#2DD4BF", fg: "#0a0a0a", x: "8%",  y: "6%",  rotate: -6, delay: 0.05 },
+  { label: "LLM Ops",           bg: "#0a0a0a", fg: "#f5f5f0", x: "38%", y: "0%",  rotate: 3,  delay: 0.15 },
+  { label: "Product Designer",  bg: "#A7F3D0", fg: "#0a0a0a", x: "68%", y: "8%",  rotate: -4, delay: 0.25 },
+  { label: "SaaS Architect",    bg: "#0E7490", fg: "#f5f5f0", x: "82%", y: "32%", rotate: 6,  delay: 0.35 },
+  { label: "Mobile Engineer",   bg: "#1E293B", fg: "#5EEAD4", x: "5%",  y: "42%", rotate: 4,  delay: 0.45 },
+  { label: "3D / Motion",       bg: "#5EEAD4", fg: "#0a0a0a", x: "72%", y: "62%", rotate: -8, delay: 0.55 },
+  { label: "Web Developer",     bg: "#164E63", fg: "#67E8F9", x: "22%", y: "72%", rotate: 5,  delay: 0.65 },
+  { label: "Automation Ops",    bg: "#2DD4BF", fg: "#0a0a0a", x: "50%", y: "80%", rotate: -3, delay: 0.75 },
+  { label: "Creative Director", bg: "#f5f5f0", fg: "#0a0a0a", x: "88%", y: "78%", rotate: 8,  delay: 0.85 },
 ];
 
 const ServicesSection = () => (
