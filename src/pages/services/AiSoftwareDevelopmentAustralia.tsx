@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Brain, CheckCircle2, Cog, Database, LineChart, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Brain, CheckCircle2, Cog, Database, LineChart, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -79,80 +79,94 @@ const AiSoftwareDevelopmentAustralia = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-32 pb-20">
-        <div className="container mx-auto px-6 text-center">
+      <section className="relative pt-40 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-plus-pattern opacity-40 pointer-events-none" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at 50% 30%, transparent 0%, hsl(var(--background)) 75%)" }}
+        />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-10">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-primary text-sm font-medium tracking-widest uppercase mb-3"
+            className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6"
           >
-            AI Software Development — Australia
+            [ AI Software Development · Australia ]
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-display text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto"
+            transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-[11vw] md:text-[6.5vw] leading-[0.95] tracking-[-0.045em] font-medium max-w-6xl"
           >
-            AI Software Development <span className="text-gradient">in Australia</span>
+            Custom AI, built <br />
+            <span className="text-foreground/40">for Australian teams.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="max-w-2xl mx-auto text-lg text-muted-foreground mb-10"
+            className="mt-10 max-w-xl text-base md:text-lg text-foreground/70 leading-relaxed"
           >
-            Ceylance is an Australia-based AI software consulting company. We design, build, and ship custom AI
-            products — LLM integrations, machine learning, computer vision, and intelligent automation — for
+            Ceylance is an Australia-based AI software consulting company. We design, build and ship
+            LLM integrations, machine learning, computer vision, and intelligent automation — for
             Australian startups and enterprises.
           </motion.p>
           <Link
             to="/#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity glow"
+            className="mt-10 inline-flex items-center gap-2 pl-6 pr-2 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors group"
           >
-            Book a Free AI Consultation <ArrowRight size={18} />
+            Book a free AI consultation
+            <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-transform group-hover:rotate-45">
+              <ArrowUpRight size={16} strokeWidth={2.5} />
+            </span>
           </Link>
         </div>
       </section>
 
       {/* Capabilities */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-24 border-t border-border">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">What we build</p>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">
-              End-to-end AI <span className="text-gradient">capabilities</span>
+          <div className="max-w-4xl mb-16">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">[ What we build ]</p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium">
+              End-to-end AI <span className="text-foreground/40">capabilities.</span>
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {capabilities.map((c) => (
-              <div key={c.title} className="p-7 rounded-xl glass glass-hover">
-                <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <motion.div
+                key={c.title}
+                whileHover={{ y: -6 }}
+                className="p-8 rounded-3xl bg-muted/50 border border-border hover:border-primary/40 transition-colors"
+              >
+                <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mb-5">
                   <c.icon className="text-primary" size={20} />
                 </div>
-                <h3 className="font-display text-xl font-semibold mb-2">{c.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-              </div>
+                <h3 className="font-display text-xl font-medium tracking-[-0.02em] mb-3">{c.title}</h3>
+                <p className="text-sm text-foreground/60 leading-relaxed">{c.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section className="py-20">
+      <section className="py-24 border-t border-border">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">How we work</p>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">
-              From idea to production <span className="text-gradient">AI</span>
+          <div className="max-w-4xl mb-16">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">[ How we work ]</p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium">
+              From idea to <span className="text-foreground/40">production AI.</span>
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {process.map((p) => (
-              <div key={p.step} className="p-7 rounded-xl border border-border bg-card">
-                <p className="font-display text-3xl font-bold text-primary mb-3">{p.step}</p>
-                <h3 className="font-display text-lg font-semibold mb-2">{p.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+              <div key={p.step} className="p-8 rounded-3xl bg-muted/50 border border-border">
+                <span className="font-mono text-xs tracking-widest text-foreground/40">{p.step}</span>
+                <h3 className="font-display text-xl font-medium tracking-[-0.02em] mt-6 mb-3">{p.title}</h3>
+                <p className="text-sm text-foreground/60 leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -160,14 +174,14 @@ const AiSoftwareDevelopmentAustralia = () => {
       </section>
 
       {/* Why Australia */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-24 border-t border-border">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">Why Ceylance</p>
-            <h2 className="font-display text-3xl md:text-5xl font-bold mb-6">
-              An Australian AI partner <span className="text-gradient">you can trust</span>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">[ Why Ceylance ]</p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium mb-6">
+              An Australian AI partner <span className="text-foreground/40">you can trust.</span>
             </h2>
-            <p className="text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-foreground/60 mb-6 leading-relaxed">
               We combine deep AI engineering with Australian business context — practical use cases, local
               compliance, and a delivery team that's reachable in your timezone.
             </p>
@@ -186,16 +200,16 @@ const AiSoftwareDevelopmentAustralia = () => {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-4">
             {[
               { v: "2–4 wks", l: "POC Timeline" },
               { v: "100%", l: "AU Data Residency" },
               { v: "50+", l: "Projects Delivered" },
               { v: "24/7", l: "Production Support" },
             ].map((s) => (
-              <div key={s.l} className="p-6 rounded-xl glass glass-hover text-center">
-                <p className="font-display text-3xl font-bold text-primary mb-1">{s.v}</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.l}</p>
+              <div key={s.l} className="p-6 rounded-3xl bg-muted/50 border border-border">
+                <p className="font-display text-3xl md:text-4xl font-medium tracking-[-0.03em] text-foreground">{s.v}</p>
+                <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50">{s.l}</p>
               </div>
             ))}
           </div>
@@ -203,22 +217,22 @@ const AiSoftwareDevelopmentAustralia = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-20">
+      <section className="py-24 border-t border-border">
         <div className="container mx-auto px-6 max-w-3xl">
-          <div className="text-center mb-14">
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">FAQ</p>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">
-              Common <span className="text-gradient">questions</span>
+          <div className="mb-14">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">[ FAQ ]</p>
+            <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium">
+              Common <span className="text-foreground/40">questions.</span>
             </h2>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqs.map((f) => (
-              <details key={f.q} className="group rounded-xl border border-border bg-card p-6">
-                <summary className="font-display text-lg font-semibold cursor-pointer list-none flex items-center justify-between gap-4">
+              <details key={f.q} className="group rounded-3xl border border-border bg-muted/50 p-6 hover:border-primary/40 transition-colors">
+                <summary className="font-display text-lg font-medium tracking-[-0.02em] cursor-pointer list-none flex items-center justify-between gap-4">
                   {f.q}
                   <span className="text-primary group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
                 </summary>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-4">{f.a}</p>
+                <p className="text-sm text-foreground/60 leading-relaxed mt-4">{f.a}</p>
               </details>
             ))}
           </div>
@@ -226,19 +240,24 @@ const AiSoftwareDevelopmentAustralia = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-6 text-center max-w-2xl">
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-6">
-            Ready to build with <span className="text-gradient">AI</span>?
+      <section className="relative py-32 border-t border-border overflow-hidden">
+        <div className="absolute inset-0 bg-plus-pattern opacity-30 pointer-events-none" />
+        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-[-0.045em] font-medium mb-6">
+            Ready to build <br /><span className="text-foreground/40">with AI?</span>
           </h2>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-foreground/60 mb-10 max-w-lg mx-auto">
             Tell us about your data and we'll come back with a practical AI roadmap within 48 hours.
           </p>
           <Link
             to="/#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity glow"
+            className="inline-flex items-center gap-2 pl-6 pr-2 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors group"
           >
-            Book a Free Consultation <ArrowRight size={18} />
+            Book a free consultation
+            <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-transform group-hover:rotate-45">
+              <ArrowUpRight size={16} strokeWidth={2.5} />
+            </span>
           </Link>
         </div>
       </section>
