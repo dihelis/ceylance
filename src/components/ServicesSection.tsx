@@ -7,23 +7,27 @@ import { Sparkles, Smartphone, Globe, Bot, LineChart, Workflow, ArrowUpRight } f
 // `span` is [colSpan, rowSpan] on desktop; mobile collapses to a simpler 2-col.
 type Tile = { label: string; heat: number; span: [number, number]; mobileSpan?: [number, number] };
 
+// Mosaic on an 8-col grid with square cells — spans read as clear multiples
+// (4×2, 3×3, 3×1, 2×2, etc.) so the wall feels architectural.
 const tiles: Tile[] = [
-  { label: "Turn your idea into an app", heat: 1.00, span: [3, 2], mobileSpan: [2, 2] }, // big hero
-  { label: "Launch in weeks, not years", heat: 0.30, span: [2, 1] },
-  { label: "No jargon, ever",            heat: 0.85, span: [1, 1] }, // square
-  { label: "Make AI actually useful",    heat: 0.90, span: [1, 2], mobileSpan: [1, 2] }, // tall
-  { label: "Automate the busywork",      heat: 0.55, span: [2, 1] },
-  { label: "Apps people love using",     heat: 0.70, span: [2, 2] }, // big square
-  { label: "Websites that convert",      heat: 0.40, span: [1, 1] },
+  { label: "Turn your idea into an app", heat: 1.00, span: [4, 2], mobileSpan: [2, 2] }, // 4×2 hero
+  { label: "Make AI actually useful",    heat: 0.90, span: [3, 3], mobileSpan: [2, 2] }, // 3×3 square
+  { label: "No jargon, ever",            heat: 0.85, span: [1, 1] },
+  { label: "Fixed scope, fixed price",   heat: 0.25, span: [1, 2] },                     // 1×2 tall
+  { label: "A team that owns delivery",  heat: 0.55, span: [3, 1] },                     // 3×1 bar
+  { label: "Launch in weeks, not years", heat: 0.35, span: [4, 1] },                     // 4×1 wide
+  { label: "Apps people love using",     heat: 0.70, span: [2, 2], mobileSpan: [2, 1] }, // 2×2 square
+  { label: "Automate the busywork",      heat: 0.60, span: [3, 2] },                     // 3×2
+  { label: "Websites that convert",      heat: 0.40, span: [2, 1] },                     // 2×1
   { label: "Plain-English updates",      heat: 0.15, span: [1, 1] },
-  { label: "A team that owns delivery",  heat: 0.60, span: [3, 1] }, // wide rectangle
-  { label: "Fixed scope, fixed price",   heat: 0.25, span: [2, 1] },
-  { label: "One partner, end to end",    heat: 0.80, span: [1, 1] },
+  { label: "Built to scale with you",    heat: 0.50, span: [2, 1] },
+  { label: "One partner, end to end",    heat: 0.80, span: [3, 1] },                     // 3×1
 ];
 
+// Static class strings so Tailwind's JIT can detect them.
 const spanClass = (c: number, r: number) => {
-  const cols = ["", "md:col-span-1", "md:col-span-2", "md:col-span-3", "md:col-span-4", "md:col-span-5", "md:col-span-6"];
-  const rows = ["", "md:row-span-1", "md:row-span-2", "md:row-span-3"];
+  const cols = ["", "md:col-span-1", "md:col-span-2", "md:col-span-3", "md:col-span-4", "md:col-span-5", "md:col-span-6", "md:col-span-7", "md:col-span-8"];
+  const rows = ["", "md:row-span-1", "md:row-span-2", "md:row-span-3", "md:row-span-4"];
   return `${cols[c]} ${rows[r]}`;
 };
 const mobileSpanClass = (c: number, r: number) => {
@@ -126,7 +130,8 @@ const ServicesSection = () => (
         </span>
       </div>
 
-      <div className="grid grid-flow-dense grid-cols-2 auto-rows-[8rem] md:grid-cols-6 md:auto-rows-[9rem] gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
+      {/* Square cells: auto-rows match column width so N×N really is a square. */}
+      <div className="grid grid-flow-dense grid-cols-2 auto-rows-[minmax(0,1fr)] [grid-auto-rows:calc((100vw-3rem)/2)] md:[grid-auto-rows:calc((min(80rem,100vw)-5rem)/8)] md:grid-cols-8 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
         {tiles.map((t, i) => {
           const s = heatStyle(t.heat);
           const m = t.mobileSpan ?? [1, 1];
