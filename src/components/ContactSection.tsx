@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowUpRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -43,35 +43,37 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-28 bg-secondary/30">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">Get in Touch</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-              Let's Build
-              <br />
-              <span className="text-gradient">Something Great</span>
+    <section id="contact" className="relative py-32 md:py-40 border-t border-border overflow-hidden">
+      <div className="absolute inset-0 bg-plus-pattern opacity-30 pointer-events-none" />
+      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">
+              [ Let's talk ]
+            </p>
+            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-[-0.045em] font-medium mb-8">
+              Start with a <br />
+              <span className="text-foreground/40">conversation.</span>
             </h2>
-            <p className="text-muted-foreground mb-10 leading-relaxed">
-              Whether you're launching a new product or modernising existing systems, we'd love to hear about your
-              project.
+            <p className="text-foreground/70 mb-12 leading-relaxed max-w-md">
+              Whether you're launching a new product or modernising existing systems — tell us the shape of it and we'll respond within 24 hours.
             </p>
             <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                   <Mail className="text-primary" size={18} />
                 </div>
                 <span className="text-foreground text-sm">hello@ceylance.com</span>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                   <Phone className="text-primary" size={18} />
                 </div>
                 <span className="text-foreground text-sm">+61 0404 173 536</span>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                   <MapPin className="text-primary" size={18} />
                 </div>
                 <span className="text-foreground text-sm">Norwood SA 5067</span>
@@ -79,22 +81,21 @@ const ContactSection = () => {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}>
             {submitted ? (
-              <div className="h-full flex items-center justify-center rounded-xl bg-card border border-border p-12 text-center">
+              <div className="h-full flex items-center justify-center rounded-3xl bg-muted/50 border border-border p-12 text-center">
                 <div>
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                     <Mail className="text-primary" size={28} />
                   </div>
-                  <h3 className="font-display text-2xl font-semibold mb-2">Message Sent!</h3>
-                  <p className="text-muted-foreground text-sm">We'll be in touch within 24 hours.</p>
+                  <h3 className="font-display text-2xl font-medium tracking-[-0.02em] mb-2">Message sent</h3>
+                  <p className="text-foreground/60 text-sm">We'll be in touch within 24 hours.</p>
                 </div>
               </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="space-y-5 p-8 rounded-xl bg-card border border-border"
-                style={{ boxShadow: "var(--shadow-card)" }}
+                className="space-y-5 p-8 md:p-10 rounded-3xl bg-muted/50 border border-border backdrop-blur-sm"
               >
                 <div className="grid sm:grid-cols-2 gap-5">
                   <input
@@ -104,7 +105,7 @@ const ContactSection = () => {
                     placeholder="Name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                    className="w-full px-5 py-4 rounded-full bg-background border border-border text-foreground text-sm placeholder:text-foreground/40 focus:outline-none focus:border-primary/60 transition-colors"
                   />
                   <input
                     required
@@ -113,7 +114,7 @@ const ContactSection = () => {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                    className="w-full px-5 py-4 rounded-full bg-background border border-border text-foreground text-sm placeholder:text-foreground/40 focus:outline-none focus:border-primary/60 transition-colors"
                   />
                 </div>
                 <input
@@ -122,7 +123,7 @@ const ContactSection = () => {
                   placeholder="Company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                  className="w-full px-5 py-4 rounded-full bg-background border border-border text-foreground text-sm placeholder:text-foreground/40 focus:outline-none focus:border-primary/60 transition-colors"
                 />
                 <textarea
                   required
@@ -131,23 +132,18 @@ const ContactSection = () => {
                   placeholder="Tell us about your project..."
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                  className="w-full px-5 py-4 rounded-3xl bg-background border border-border text-foreground text-sm placeholder:text-foreground/40 focus:outline-none focus:border-primary/60 transition-colors resize-none"
                 />
                 {error && <p className="text-sm text-destructive">{error}</p>}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity disabled:opacity-60"
+                  className="w-full inline-flex items-center justify-center gap-2 pl-6 pr-2 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors group disabled:opacity-60"
                 >
-                  {loading ? (
-                    <>
-                      <Loader2 size={18} className="animate-spin" /> Sending…
-                    </>
-                  ) : (
-                    <>
-                      Send Message <ArrowRight size={18} />
-                    </>
-                  )}
+                  <span className="py-2">{loading ? "Sending…" : "Send message"}</span>
+                  <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-transform group-hover:rotate-45">
+                    {loading ? <Loader2 size={14} className="animate-spin" /> : <ArrowUpRight size={14} strokeWidth={2.5} />}
+                  </span>
                 </button>
               </form>
             )}
