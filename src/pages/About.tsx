@@ -318,42 +318,114 @@ const About = () => {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {caseStudies.map((study, i) => (
-              <motion.div
-                key={study.title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                whileHover={{ y: -6 }}
-                className="group p-7 rounded-3xl bg-muted/50 border border-border hover:border-primary/40 transition-colors flex flex-col"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-full bg-primary/10">
-                    <study.icon className="text-primary" size={20} />
+          <div className="border border-foreground/15 overflow-hidden">
+            <table className="w-full text-left border-collapse hidden md:table">
+              <thead>
+                <tr className="bg-primary/10 border-b border-foreground/10 text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/70">
+                  <th className="p-5 font-normal">Industry</th>
+                  <th className="p-5 font-normal">Project</th>
+                  <th className="p-5 font-normal">What we delivered</th>
+                  <th className="p-5 font-normal">Results</th>
+                  <th className="p-5 font-normal text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {caseStudies.map((study, i) => (
+                  <motion.tr
+                    key={study.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.5 }}
+                    className="border-b border-foreground/10 hover:bg-primary/[0.04] transition-colors group"
+                  >
+                    <td className="p-5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/15 flex items-center justify-center shrink-0">
+                          <study.icon className="text-primary" size={18} />
+                        </div>
+                        <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-primary">
+                          {study.industry}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-5">
+                      <p className="font-display text-lg font-medium tracking-[-0.02em] text-foreground">{study.title}</p>
+                    </td>
+                    <td className="p-5 text-sm text-foreground/60 leading-relaxed max-w-md">{study.summary}</td>
+                    <td className="p-5">
+                      <div className="flex flex-wrap gap-2">
+                        {study.results.map((r) => (
+                          <span
+                            key={r}
+                            className="text-[11px] px-2.5 py-1 bg-primary/10 text-primary font-medium"
+                          >
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="p-5 text-right">
+                      <button className="inline-flex items-center justify-center w-10 h-10 bg-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors">
+                        <ArrowUpRight size={16} strokeWidth={2.5} />
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Mobile card stack */}
+            <div className="md:hidden flex flex-col divide-y divide-foreground/10">
+              {caseStudies.map((study, i) => (
+                <motion.div
+                  key={study.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06, duration: 0.5 }}
+                  className="p-5 bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-primary/15 flex items-center justify-center shrink-0">
+                        <study.icon className="text-primary" size={18} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-primary mb-0.5">
+                          {study.industry}
+                        </p>
+                        <h4 className="font-display text-lg font-medium tracking-[-0.02em] leading-tight">
+                          {study.title}
+                        </h4>
+                      </div>
+                    </div>
+                    <button className="inline-flex items-center justify-center w-10 h-10 bg-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors">
+                      <ArrowUpRight size={16} strokeWidth={2.5} />
+                    </button>
                   </div>
-                  <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-primary">
-                    {study.industry}
-                  </span>
-                </div>
-                <h3 className="font-display text-xl font-medium tracking-[-0.02em] text-foreground mb-3">
-                  {study.title}
-                </h3>
-                <p className="text-sm text-foreground/60 leading-relaxed mb-5 flex-1">{study.summary}</p>
-                <div className="flex flex-wrap gap-2">
-                  {study.results.map((r) => (
-                    <span
-                      key={r}
-                      className="text-[11px] px-3 py-1 rounded-full bg-primary/10 text-primary font-medium"
-                    >
-                      {r}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                  <div className="space-y-3 text-sm">
+                    <div>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50 mb-1">What we delivered</p>
+                      <p className="text-foreground/60 leading-relaxed">{study.summary}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50 mb-1">Results</p>
+                      <div className="flex flex-wrap gap-2">
+                        {study.results.map((r) => (
+                          <span
+                            key={r}
+                            className="text-[11px] px-2.5 py-1 bg-primary/10 text-primary font-medium"
+                          >
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
