@@ -44,36 +44,48 @@ const heatStyle = (heat: number): { background: string; color: string; borderCol
   return { background: bg, color: fg, borderColor: border };
 };
 
-const services = [
+const packages = [
   {
     icon: Sparkles,
-    title: "Take my idea to launch",
-    desc: "You have the vision — we shape it into a real product. Design, build and ship, all under one roof.",
+    outcome: "Take my idea to launch",
+    bestFor: "New founders, non-technical owners with an app idea",
+    includes: "Scope, design, build, launch and handover",
+    timeline: "6–12 weeks",
   },
   {
     icon: Smartphone,
-    title: "Build a mobile app",
-    desc: "iOS and Android apps your customers actually want to open. From first sketch to the App Store.",
+    outcome: "Build a mobile app",
+    bestFor: "Businesses that need a customer-facing iOS or Android app",
+    includes: "Native-quality mobile app, App Store listing",
+    timeline: "8–14 weeks",
   },
   {
     icon: Globe,
-    title: "A website that grows the business",
-    desc: "Marketing sites, booking systems and customer portals that turn visitors into paying customers.",
+    outcome: "A website that grows the business",
+    bestFor: "Service businesses, coaches, clinics and trades",
+    includes: "Conversion-focused site, CMS and booking/contact flow",
+    timeline: "3–8 weeks",
   },
   {
     icon: Bot,
-    title: "Put AI to work in your business",
-    desc: "Practical AI — smarter search, chat assistants, document processing — tied to real outcomes, not hype.",
+    outcome: "Put AI to work in your business",
+    bestFor: "Teams drowning in documents, search or repetitive queries",
+    includes: "AI assistant, document processing or search workflow",
+    timeline: "4–10 weeks",
   },
   {
     icon: Workflow,
-    title: "Automate the repetitive stuff",
-    desc: "Cut the manual admin. We connect your tools so quotes, invoices and reports handle themselves.",
+    outcome: "Automate the repetitive stuff",
+    bestFor: "Businesses manually copying data between tools",
+    includes: "Workflow integration, auto quotes, invoices and reports",
+    timeline: "3–8 weeks",
   },
   {
     icon: LineChart,
-    title: "Modernise a tired system",
-    desc: "Legacy software slowing you down? We rebuild it into something fast, secure and easy to use.",
+    outcome: "Modernise a tired system",
+    bestFor: "Companies stuck on old software or spreadsheets",
+    includes: "Refactor/rebuild to a fast, secure, cloud-based system",
+    timeline: "8–16 weeks",
   },
 ];
 
