@@ -199,9 +199,9 @@ const ServicesSection = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -6 }}
-            className="group p-8 rounded-3xl bg-secondary-foreground/[0.04] border border-secondary-foreground/10 hover:border-primary/50 transition-colors"
+            className="group p-8 bg-secondary-foreground/[0.04] border border-secondary-foreground/10 hover:border-primary/50 transition-colors"
           >
-            <div className="w-11 h-11 rounded-full bg-primary/15 flex items-center justify-center mb-6">
+            <div className="w-11 h-11 bg-primary/15 flex items-center justify-center mb-6">
               <s.icon className="text-primary" size={20} />
             </div>
             <h4 className="font-display text-xl font-medium tracking-[-0.02em] mb-3">{s.title}</h4>
