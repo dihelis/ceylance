@@ -1,115 +1,101 @@
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  HeartPulse,
-  ShoppingCart,
-  Building2,
-  Sparkles,
-  Shirt,
-  Car,
-  Truck,
-  Factory,
-  Home,
-  GraduationCap,
-  Radio,
-} from "lucide-react";
-import GradientMesh from "@/components/GradientMesh";
+import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const industries = [
-  { icon: HeartPulse, name: "Healthcare" },
-  { icon: ShoppingCart, name: "Retail" },
-  { icon: Building2, name: "Hospitality" },
-  { icon: Sparkles, name: "Wellness" },
-  { icon: Shirt, name: "Fashion & Textile" },
-  { icon: Car, name: "Automotive" },
-  { icon: Truck, name: "Logistics" },
-  { icon: Factory, name: "Manufacturing" },
-  { icon: Home, name: "Real Estate" },
-  { icon: GraduationCap, name: "Education" },
-  { icon: Radio, name: "Telecommunication" },
-];
+const capabilities = ["AI", "SaaS", "Mobile", "Web", "Automation"];
 
 const HeroSection = () => {
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <GradientMesh />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
+  const [time, setTime] = useState("");
 
-      <div className="relative z-10 container mx-auto px-6 pt-24 pb-20 text-center">
+  useEffect(() => {
+    const tick = () => {
+      const t = new Date().toLocaleTimeString("en-AU", {
+        timeZone: "Australia/Adelaide",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+      setTime(t);
+    };
+    tick();
+    const id = setInterval(tick, 30_000);
+    return () => clearInterval(id);
+  }, []);
+
+  const scrollToContact = () =>
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+
+  return (
+    <section className="relative min-h-screen w-full overflow-hidden bg-background">
+      {/* Plus / dot pattern background */}
+      <div className="absolute inset-0 bg-plus-pattern opacity-60" />
+      <div className="absolute inset-0 bg-dot-pattern opacity-40" />
+      {/* Radial fade */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 40%, transparent 0%, hsl(var(--background)) 75%)",
+        }}
+      />
+      {/* Ambient orange glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+
+      <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-10 pt-32 md:pt-40 pb-8">
+        {/* Headline block */}
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 40,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.8,
-            ease: "easeOut",
-          }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-6xl"
         >
-          <p className="text-primary font-medium text-sm tracking-widest uppercase mb-6">
-            Australia-Based Software Consulting — Serving AU, UK & UAE
-          </p>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-6">
-            Build Scalable AI, SaaS,
-            <br />
-            <span className="text-gradient">Web & Mobile Products</span>
+          <h1 className="font-display text-[13vw] md:text-[7.5vw] leading-[0.95] font-medium tracking-[-0.045em] text-foreground">
+            AI-native product<br />
+            studio for <span className="text-primary">SaaS</span>,<br />
+            mobile, web &amp; AI.
           </h1>
-          <p className="max-w-xl mx-auto text-lg mb-10 text-secondary-foreground">
-            Ceylance helps Australian startups and businesses design, develop, and launch secure custom software — from
-            MVPs to full-scale digital platforms.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+          <div className="mt-10 max-w-xl">
+            <p className="text-base md:text-lg text-foreground/70 leading-relaxed">
+              We don't work for your team — we become part of it.
+              Ceylance embeds with founders across AU, UK &amp; UAE to design, build,
+              and ship intelligent products from the inside out.
+            </p>
+
             <button
               onClick={scrollToContact}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity glow"
+              className="mt-8 inline-flex items-center gap-2 pl-6 pr-2 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors group"
             >
-              Book a Free Consultation <ArrowRight size={18} />
-            </button>
-            <button
-              onClick={() =>
-                document.getElementById("services")?.scrollIntoView({
-                  behavior: "smooth",
-                })
-              }
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-border text-foreground font-semibold hover:border-primary/50 transition-colors"
-            >
-              Our Services
+              Book a strategy call
+              <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-transform group-hover:rotate-45">
+                <ArrowUpRight size={16} strokeWidth={2.5} />
+              </span>
             </button>
           </div>
         </motion.div>
 
-        {/* Industry marquee */}
+        {/* Bottom corner meta */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="mt-20 relative w-full"
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-24 grid grid-cols-2 md:grid-cols-3 gap-8 text-xs uppercase tracking-[0.15em] text-foreground/60"
         >
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
-          <div className="flex gap-3 animate-marquee">
-            {[...Array(2)].map((_, dupeIdx) => (
-              <div key={dupeIdx} className="flex gap-3 shrink-0">
-                {industries.map((ind) => (
-                  <div
-                    key={`${dupeIdx}-${ind.name}`}
-                    className="flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 bg-background/40 backdrop-blur-sm shrink-0"
-                  >
-                    <ind.icon className="text-primary" size={14} />
-                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">{ind.name}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
+          <div className="flex flex-col gap-1">
+            <span className="text-foreground/40">Studio</span>
+            <span>Opinionated · AI-native · Operators</span>
+          </div>
+          <div className="hidden md:flex flex-col gap-1 items-center text-center">
+            <span className="text-foreground/40">Global impact</span>
+            <span>Adelaide, AU — {time}</span>
+          </div>
+          <div className="flex flex-col gap-1 md:items-end md:text-right">
+            <span className="text-foreground/40">Capabilities</span>
+            <div className="flex flex-wrap gap-x-3 md:justify-end">
+              {capabilities.map((c) => (
+                <span key={c}>{c}</span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const sectionLinks = ["Services", "Process", "Contact"];
-const pageLinks = [{ label: "About Us", href: "/about" }];
+const pageLinks = [{ label: "About", href: "/about" }];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -21,18 +21,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
-      <div className="container mx-auto flex items-center justify-between h-16 px-6">
-        <a href="/" className="font-display text-xl font-bold tracking-tight text-foreground">
-          Ceylance<span className="text-primary">.</span>
-        </a>
-
-        <div className="hidden md:flex items-center gap-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+      <div className="px-6 md:px-10 py-6 flex items-start justify-between">
+        {/* Left — stacked links */}
+        <div className="hidden md:flex flex-col gap-1 text-sm font-medium text-foreground/90 pointer-events-auto">
           {sectionLinks.map((link) => (
             <button
               key={link}
               onClick={() => scrollTo(link)}
-              className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              className="w-fit text-left hover:text-primary transition-colors"
             >
               {link}
             </button>
@@ -41,38 +38,56 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              className="w-fit hover:text-primary transition-colors"
             >
               {link.label}
             </a>
           ))}
-          <button
-            onClick={() => scrollTo("Contact")}
-            className="px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Get in Touch
-          </button>
         </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
-          {open ? <X size={24} /> : <Menu size={24} />}
+        {/* Center — wordmark */}
+        <a
+          href="/"
+          className="pointer-events-auto font-display text-lg md:text-xl tracking-[-0.04em] font-semibold text-foreground"
+        >
+          ceylance<span className="text-primary">®</span>
+        </a>
+
+        {/* Right — CTA */}
+        <button
+          onClick={() => scrollTo("Contact")}
+          className="hidden md:inline-flex pointer-events-auto items-center gap-2 pl-5 pr-2 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors group"
+        >
+          Let's work together
+          <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center group-hover:bg-background group-hover:text-foreground transition-colors">
+            <ArrowUpRight size={14} strokeWidth={2.5} />
+          </span>
+        </button>
+
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden pointer-events-auto text-foreground p-2 rounded-full bg-card border border-border"
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden bg-background border-b border-border"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden pointer-events-auto mx-6 rounded-3xl bg-card border border-border overflow-hidden"
           >
-            <div className="px-6 py-4 flex flex-col gap-4">
+            <div className="px-6 py-5 flex flex-col gap-3">
               {sectionLinks.map((link) => (
                 <button
                   key={link}
                   onClick={() => scrollTo(link)}
-                  className="text-left font-medium text-primary hover:text-primary/80 transition-colors"
+                  className="text-left font-medium text-foreground hover:text-primary transition-colors"
                 >
                   {link}
                 </button>
@@ -81,11 +96,17 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-left font-medium text-primary hover:text-primary/80 transition-colors"
+                  className="text-left font-medium text-foreground hover:text-primary transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
+              <button
+                onClick={() => scrollTo("Contact")}
+                className="mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-foreground text-background text-sm font-medium"
+              >
+                Let's work together <ArrowUpRight size={14} />
+              </button>
             </div>
           </motion.div>
         )}
