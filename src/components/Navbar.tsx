@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
+import logoAsset from "@/assets/ceylance-logo.jpg.asset.json";
 
 const sectionLinks = ["Services", "Process", "Contact"];
 const pageLinks = [{ label: "About", href: "/about" }];
@@ -45,12 +46,18 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Center — wordmark */}
+        {/* Center — wordmark logo */}
         <a
           href="/"
-          className="pointer-events-auto font-display text-lg md:text-xl tracking-[-0.04em] font-semibold text-foreground"
+          aria-label="Ceylance home"
+          className="pointer-events-auto flex items-center"
         >
-          ceylance<span className="text-primary">®</span>
+          <img
+            src={logoAsset.url}
+            alt="Ceylance"
+            className="h-6 md:h-7 w-auto"
+            style={{ mixBlendMode: "screen" }}
+          />
         </a>
 
         {/* Right — CTA */}
