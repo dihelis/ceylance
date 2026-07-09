@@ -131,7 +131,7 @@ const ServicesSection = () => (
       </div>
 
       {/* Square cells: auto-rows match column width so N×N really is a square. */}
-      <div className="grid grid-flow-dense grid-cols-2 auto-rows-[minmax(0,1fr)] [grid-auto-rows:calc((100vw-3rem)/2)] md:[grid-auto-rows:calc((min(80rem,100vw)-5rem)/8)] md:grid-cols-8 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
+      <div className="grid grid-flow-dense grid-cols-2 md:grid-cols-8 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15 [grid-auto-rows:calc((100vw-3rem)/2)] md:[grid-auto-rows:calc((min(80rem,100vw)-5rem)/8)]">
         {tiles.map((t, i) => {
           const s = heatStyle(t.heat);
           const m = t.mobileSpan ?? [1, 1];
