@@ -1,28 +1,32 @@
 import { motion } from "framer-motion";
 import { Sparkles, Smartphone, Globe, Bot, LineChart, Workflow, ArrowUpRight } from "lucide-react";
 
-type Chip = {
-  label: string;
-  bg: string;
-  fg: string;
-  x: string;
-  y: string;
-  rotate: number;
-  delay: number;
-};
+// Outcome tiles — plain English, arranged as a flat heatmap grid.
+// `heat` (0–1) drives colour intensity so the wall reads like a heatmap.
+type Tile = { label: string; heat: number };
 
-// Outcome-oriented chips — plain English, no job titles or jargon
-const chips: Chip[] = [
-  { label: "Turn your idea into an app", bg: "#2DD4BF", fg: "#0a0a0a", x: "2%",  y: "4%",  rotate: -6, delay: 0.05 },
-  { label: "Launch in weeks, not years", bg: "#0a0a0a", fg: "#f5f5f0", x: "44%", y: "0%",  rotate: 3,  delay: 0.15 },
-  { label: "Make AI actually useful",    bg: "#A7F3D0", fg: "#0a0a0a", x: "72%", y: "8%",  rotate: -4, delay: 0.25 },
-  { label: "Automate the busywork",      bg: "#0E7490", fg: "#f5f5f0", x: "78%", y: "36%", rotate: 6,  delay: 0.35 },
-  { label: "A team that owns delivery",  bg: "#1E293B", fg: "#5EEAD4", x: "1%",  y: "40%", rotate: 4,  delay: 0.45 },
-  { label: "Apps people love using",     bg: "#5EEAD4", fg: "#0a0a0a", x: "60%", y: "64%", rotate: -8, delay: 0.55 },
-  { label: "Websites that convert",      bg: "#164E63", fg: "#67E8F9", x: "8%",  y: "72%", rotate: 5,  delay: 0.65 },
-  { label: "Plain-English updates",      bg: "#2DD4BF", fg: "#0a0a0a", x: "42%", y: "82%", rotate: -3, delay: 0.75 },
-  { label: "No jargon, ever",            bg: "#f5f5f0", fg: "#0a0a0a", x: "78%", y: "78%", rotate: 8,  delay: 0.85 },
+const tiles: Tile[] = [
+  { label: "Turn your idea into an app", heat: 1.00 },
+  { label: "Launch in weeks, not years", heat: 0.35 },
+  { label: "Make AI actually useful",    heat: 0.85 },
+  { label: "Automate the busywork",      heat: 0.55 },
+  { label: "A team that owns delivery",  heat: 0.20 },
+  { label: "Apps people love using",     heat: 0.70 },
+  { label: "Websites that convert",      heat: 0.45 },
+  { label: "Plain-English updates",      heat: 0.15 },
+  { label: "No jargon, ever",            heat: 0.90 },
+  { label: "Fixed scope, fixed price",   heat: 0.30 },
+  { label: "Built to scale with you",    heat: 0.60 },
+  { label: "One partner, end to end",    heat: 0.75 },
 ];
+
+// Map heat 0..1 to a flat teal fill + text colour with no gradients.
+const heatStyle = (heat: number): { background: string; color: string; borderColor: string } => {
+  const bg = `hsl(180 ${Math.round(40 + heat * 50)}% ${Math.round(96 - heat * 78)}%)`;
+  const fg = heat > 0.55 ? "#f5f5f0" : "#0a0a0a";
+  const border = `hsl(180 ${Math.round(30 + heat * 40)}% ${Math.round(88 - heat * 78)}%)`;
+  return { background: bg, color: fg, borderColor: border };
+};
 
 const services = [
   {
@@ -94,25 +98,48 @@ const ServicesSection = () => (
       </motion.p>
     </div>
 
-    {/* Outcome chips */}
-    <div className="relative mt-16 md:mt-24 h-[560px] md:h-[520px] max-w-6xl mx-auto px-6">
-      {chips.map((c) => (
-        <motion.div
-          key={c.label}
-          initial={{ opacity: 0, y: 30, rotate: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, y: 0, rotate: c.rotate, scale: 1 }}
-          whileHover={{ scale: 1.08, rotate: 0, zIndex: 20 }}
-          viewport={{ once: true }}
-          transition={{ delay: c.delay, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          style={{ left: c.x, top: c.y, background: c.bg, color: c.fg }}
-          className="absolute px-5 md:px-6 py-2.5 md:py-3 rounded-full font-medium text-sm md:text-base shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)] whitespace-nowrap cursor-grab active:cursor-grabbing"
-        >
-          {c.label}
-        </motion.div>
-      ))}
+    {/* Outcome heatmap — flat, no rounded corners */}
+    <div className="max-w-7xl mx-auto px-6 md:px-10 mt-16 md:mt-24 relative z-10">
+      <div className="flex items-center gap-3 mb-4 text-[10px] font-mono uppercase tracking-[0.2em] text-secondary-foreground/50">
+        <span>[ Outcomes we deliver ]</span>
+        <span className="flex-1 h-px bg-secondary-foreground/15" />
+        <span className="flex items-center gap-2">
+          <span>less</span>
+          <span className="flex">
+            {[0.1, 0.3, 0.5, 0.7, 0.95].map((h) => (
+              <span key={h} className="w-4 h-3" style={{ background: heatStyle(h).background }} />
+            ))}
+          </span>
+          <span>more common</span>
+        </span>
+      </div>
 
-      <div className="absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
+        {tiles.map((t, i) => {
+          const s = heatStyle(t.heat);
+          return (
+            <motion.div
+              key={t.label}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04, duration: 0.4 }}
+              whileHover={{ scale: 1.02, zIndex: 5 }}
+              style={{ background: s.background, color: s.color }}
+              className="relative aspect-[5/3] flex flex-col justify-between p-5 md:p-6 cursor-default"
+            >
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-60"
+                style={{ color: s.color }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="font-display text-lg md:text-xl leading-[1.1] tracking-[-0.02em] font-medium">
+                {t.label}
+              </span>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
 
