@@ -119,15 +119,6 @@ const ServicesSection = () => (
       <div className="flex items-center gap-3 mb-4 text-[10px] font-mono uppercase tracking-[0.2em] text-secondary-foreground/50">
         <span>[ Outcomes we deliver ]</span>
         <span className="flex-1 h-px bg-secondary-foreground/15" />
-        <span className="flex items-center gap-2">
-          <span>less</span>
-          <span className="flex">
-            {[0.1, 0.3, 0.5, 0.7, 0.95].map((h) => (
-              <span key={h} className="w-4 h-3" style={{ background: heatStyle(h).background }} />
-            ))}
-          </span>
-          <span>more common</span>
-        </span>
       </div>
 
       {/* Square cells: auto-rows match column width so N×N really is a square. */}
