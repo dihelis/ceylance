@@ -3,22 +3,34 @@ import { Sparkles, Smartphone, Globe, Bot, LineChart, Workflow, ArrowUpRight } f
 
 // Outcome tiles — plain English, arranged as a flat heatmap grid.
 // `heat` (0–1) drives colour intensity so the wall reads like a heatmap.
-type Tile = { label: string; heat: number };
+// Bento heatmap — mixed squares/rectangles laid out on a 6-col × 4-row grid.
+// `span` is [colSpan, rowSpan] on desktop; mobile collapses to a simpler 2-col.
+type Tile = { label: string; heat: number; span: [number, number]; mobileSpan?: [number, number] };
 
 const tiles: Tile[] = [
-  { label: "Turn your idea into an app", heat: 1.00 },
-  { label: "Launch in weeks, not years", heat: 0.35 },
-  { label: "Make AI actually useful",    heat: 0.85 },
-  { label: "Automate the busywork",      heat: 0.55 },
-  { label: "A team that owns delivery",  heat: 0.20 },
-  { label: "Apps people love using",     heat: 0.70 },
-  { label: "Websites that convert",      heat: 0.45 },
-  { label: "Plain-English updates",      heat: 0.15 },
-  { label: "No jargon, ever",            heat: 0.90 },
-  { label: "Fixed scope, fixed price",   heat: 0.30 },
-  { label: "Built to scale with you",    heat: 0.60 },
-  { label: "One partner, end to end",    heat: 0.75 },
+  { label: "Turn your idea into an app", heat: 1.00, span: [3, 2], mobileSpan: [2, 2] }, // big hero
+  { label: "Launch in weeks, not years", heat: 0.30, span: [2, 1] },
+  { label: "No jargon, ever",            heat: 0.85, span: [1, 1] }, // square
+  { label: "Make AI actually useful",    heat: 0.90, span: [1, 2], mobileSpan: [1, 2] }, // tall
+  { label: "Automate the busywork",      heat: 0.55, span: [2, 1] },
+  { label: "Apps people love using",     heat: 0.70, span: [2, 2] }, // big square
+  { label: "Websites that convert",      heat: 0.40, span: [1, 1] },
+  { label: "Plain-English updates",      heat: 0.15, span: [1, 1] },
+  { label: "A team that owns delivery",  heat: 0.60, span: [3, 1] }, // wide rectangle
+  { label: "Fixed scope, fixed price",   heat: 0.25, span: [2, 1] },
+  { label: "One partner, end to end",    heat: 0.80, span: [1, 1] },
 ];
+
+const spanClass = (c: number, r: number) => {
+  const cols = ["", "md:col-span-1", "md:col-span-2", "md:col-span-3", "md:col-span-4", "md:col-span-5", "md:col-span-6"];
+  const rows = ["", "md:row-span-1", "md:row-span-2", "md:row-span-3"];
+  return `${cols[c]} ${rows[r]}`;
+};
+const mobileSpanClass = (c: number, r: number) => {
+  const cols = ["", "col-span-1", "col-span-2"];
+  const rows = ["", "row-span-1", "row-span-2"];
+  return `${cols[c]} ${rows[r]}`;
+};
 
 // Map heat 0..1 to a flat teal fill + text colour with no gradients.
 const heatStyle = (heat: number): { background: string; color: string; borderColor: string } => {
@@ -114,9 +126,10 @@ const ServicesSection = () => (
         </span>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
+      <div className="grid grid-cols-2 md:grid-cols-6 md:auto-rows-[9rem] gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
         {tiles.map((t, i) => {
           const s = heatStyle(t.heat);
+          const m = t.mobileSpan ?? [1, 1];
           return (
             <motion.div
               key={t.label}
@@ -124,9 +137,9 @@ const ServicesSection = () => (
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04, duration: 0.4 }}
-              whileHover={{ scale: 1.02, zIndex: 5 }}
+              whileHover={{ scale: 1.015, zIndex: 5 }}
               style={{ background: s.background, color: s.color }}
-              className="relative aspect-[5/3] flex flex-col justify-between p-5 md:p-6 cursor-default"
+              className={`relative flex flex-col justify-between p-5 md:p-6 cursor-default ${mobileSpanClass(m[0], m[1])} ${spanClass(t.span[0], t.span[1])}`}
             >
               <span
                 className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-60"
@@ -134,7 +147,17 @@ const ServicesSection = () => (
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="font-display text-lg md:text-xl leading-[1.1] tracking-[-0.02em] font-medium">
+              <span
+                className="font-display leading-[1.05] tracking-[-0.025em] font-medium"
+                style={{
+                  fontSize:
+                    t.span[0] >= 3 || t.span[1] >= 2
+                      ? "clamp(1.5rem, 2.4vw, 2.25rem)"
+                      : t.span[0] === 2
+                      ? "clamp(1.125rem, 1.6vw, 1.5rem)"
+                      : "1.125rem",
+                }}
+              >
                 {t.label}
               </span>
             </motion.div>
