@@ -235,61 +235,45 @@ const About = () => {
           </motion.div>
         </div>
 
-        {/* Marquee row 1 */}
-        <div className="relative w-full">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
-          <div className="flex gap-4 animate-marquee">
-            {[...Array(2)].map((_, dupeIdx) => (
-              <div key={dupeIdx} className="flex gap-4 shrink-0">
-                {[
-                  { icon: HeartPulse, name: "Healthcare" },
-                  { icon: ShoppingCart, name: "Retail" },
-                  { icon: Building2, name: "Hospitality" },
-                  { icon: HeartPulse, name: "Wellness" },
-                  { icon: Truck, name: "Fashion & Textile" },
-                  { icon: Truck, name: "Automotive" },
-                ].map((industry) => (
-                  <div
-                    key={`${dupeIdx}-${industry.name}`}
-                    className="flex items-center gap-3 px-6 py-4 rounded-full bg-muted/50 border border-border shrink-0"
-                  >
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <industry.icon className="text-primary" size={18} />
-                    </div>
-                    <span className="text-sm font-medium text-foreground whitespace-nowrap">{industry.name}</span>
+        {/* Industry mosaic — flat bento wall */}
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/15 border border-foreground/15">
+            {[
+              { icon: HeartPulse, name: "Healthcare", span: "md:col-span-2 md:row-span-1" },
+              { icon: ShoppingCart, name: "Retail", span: "md:col-span-1 md:row-span-1" },
+              { icon: Building2, name: "Hospitality", span: "md:col-span-1 md:row-span-1" },
+              { icon: HeartPulse, name: "Wellness", span: "md:col-span-2 md:row-span-1" },
+              { icon: Truck, name: "Automotive", span: "md:col-span-1 md:row-span-1" },
+              { icon: Truck, name: "Logistics", span: "md:col-span-1 md:row-span-1" },
+              { icon: Truck, name: "Fashion & Textile", span: "md:col-span-1 md:row-span-2" },
+              { icon: Building2, name: "Manufacturing", span: "md:col-span-2 md:row-span-1" },
+              { icon: Landmark, name: "Real Estate", span: "md:col-span-1 md:row-span-1" },
+              { icon: GraduationCap, name: "Education", span: "md:col-span-2 md:row-span-1" },
+              { icon: Building2, name: "Telecommunication", span: "md:col-span-1 md:row-span-1" },
+            ].map((industry, i) => (
+              <motion.div
+                key={industry.name}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04, duration: 0.4 }}
+                whileHover={{ backgroundColor: "hsl(var(--primary) / 0.10)" }}
+                className={`relative p-6 md:p-8 bg-background transition-colors group cursor-default ${industry.span}`}
+              >
+                <div className="flex flex-col h-full justify-between min-h-[140px] md:min-h-[160px]">
+                  <div className="w-10 h-10 bg-primary/15 flex items-center justify-center shrink-0">
+                    <industry.icon className="text-primary" size={18} />
                   </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Marquee row 2 (reverse) */}
-        <div className="relative w-full mt-4">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
-          <div className="flex gap-4 animate-marquee-reverse">
-            {[...Array(2)].map((_, dupeIdx) => (
-              <div key={dupeIdx} className="flex gap-4 shrink-0">
-                {[
-                  { icon: Truck, name: "Logistics" },
-                  { icon: Building2, name: "Manufacturing" },
-                  { icon: Landmark, name: "Real Estate" },
-                  { icon: GraduationCap, name: "Education" },
-                  { icon: Building2, name: "Telecommunication" },
-                ].map((industry) => (
-                  <div
-                    key={`${dupeIdx}-${industry.name}`}
-                    className="flex items-center gap-3 px-6 py-4 rounded-full bg-muted/50 border border-border shrink-0"
-                  >
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <industry.icon className="text-primary" size={18} />
-                    </div>
-                    <span className="text-sm font-medium text-foreground whitespace-nowrap">{industry.name}</span>
+                  <div>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50 mb-1">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <p className="font-display text-lg md:text-xl font-medium tracking-[-0.02em] text-foreground leading-tight">
+                      {industry.name}
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
