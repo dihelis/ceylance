@@ -126,7 +126,7 @@ const ServicesSection = () => (
         </span>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-6 md:auto-rows-[9rem] gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
+      <div className="grid grid-flow-dense grid-cols-2 auto-rows-[8rem] md:grid-cols-6 md:auto-rows-[9rem] gap-px bg-secondary-foreground/15 border border-secondary-foreground/15">
         {tiles.map((t, i) => {
           const s = heatStyle(t.heat);
           const m = t.mobileSpan ?? [1, 1];
