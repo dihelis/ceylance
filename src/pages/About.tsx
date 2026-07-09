@@ -134,31 +134,38 @@ const About = () => {
             className="max-w-4xl mb-14"
           >
             <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">
-              [ Our approach ]
+              [ About Ceylance ]
             </p>
             <h2 className="font-display text-4xl md:text-6xl leading-[1.02] tracking-[-0.035em] font-medium mb-6">
-              From AI-driven solutions to scalable SaaS platforms —{" "}
-              <span className="text-foreground/40">we ship products that move the needle.</span>
+              Technology partners{" "}
+              <span className="text-foreground/40">you can trust.</span>
             </h2>
             <p className="text-foreground/60 leading-relaxed max-w-2xl">
-              We combine deep technical expertise with genuine business understanding. Every engagement
-              starts with listening — understanding your goals, constraints, and users — so we can
-              architect solutions that truly move the needle.
+              Ceylance is a boutique software consultancy helping businesses across Australia
+              and the United Kingdom harness the power of modern technology. From AI-driven
+              solutions to scalable SaaS platforms, we deliver digital products that drive real results.
             </p>
           </motion.div>
 
-          {/* Stats bar */}
+          {/* Stats grid — flat, square cells */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15 mb-8"
           >
             {stats.map((s) => (
-              <div key={s.label} className="p-6 rounded-3xl bg-muted/50 border border-border">
-                <p className="font-display text-3xl md:text-4xl font-medium tracking-[-0.03em] text-foreground">{s.value}</p>
-                <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50">{s.label}</p>
+              <div
+                key={s.label}
+                className="p-6 md:p-8 bg-secondary-foreground/[0.04] hover:bg-primary/10 transition-colors"
+              >
+                <p className="font-display text-3xl md:text-4xl font-medium tracking-[-0.03em] text-foreground">
+                  {s.value}
+                </p>
+                <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50">
+                  {s.label}
+                </p>
               </div>
             ))}
           </motion.div>
@@ -169,32 +176,52 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-8 rounded-3xl bg-muted/50 border border-border"
+            className="border border-secondary-foreground/15 overflow-hidden"
           >
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {reasons.map((r) => (
-                <div key={r} className="flex items-center gap-2">
-                  <CheckCircle2 className="text-primary shrink-0" size={15} />
-                  <span className="text-sm text-foreground">{r}</span>
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-secondary-foreground/15">
+              <div className="p-6 md:p-8">
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50 mb-4">
+                  [ Why work with us ]
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {reasons.map((r) => (
+                    <div key={r} className="flex items-start gap-3">
+                      <div className="w-5 h-5 bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
+                        <CheckCircle2 className="text-primary" size={13} />
+                      </div>
+                      <span className="text-sm text-foreground/80 leading-snug">{r}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div className="flex gap-3 shrink-0">
-              <button
-                onClick={() => setShowViewer(true)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <Eye size={15} />
-                Company Profile
-              </button>
-              <a
-                href="/ceylance-brochure.pdf"
-                download
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-foreground font-medium text-sm hover:border-primary/50 transition-colors"
-              >
-                <Download size={15} />
-                Download
-              </a>
+              </div>
+
+              <div className="p-6 md:p-8 flex flex-col justify-between gap-6">
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50 mb-2">
+                    [ Company profile ]
+                  </p>
+                  <p className="text-sm text-foreground/60 leading-relaxed">
+                    Download our full profile for service details, case studies and how we work.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowViewer(true)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
+                  >
+                    <Eye size={15} />
+                    View Profile
+                  </button>
+                  <a
+                    href="/ceylance-brochure.pdf"
+                    download
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-secondary-foreground/20 text-foreground font-medium text-sm hover:border-primary/50 transition-colors"
+                  >
+                    <Download size={15} />
+                    Download
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
