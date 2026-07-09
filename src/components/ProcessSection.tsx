@@ -1,10 +1,26 @@
 import { motion } from "framer-motion";
 
 const steps = [
-  { num: "01", title: "Discovery", desc: "We dive deep into your goals, users, and market landscape." },
-  { num: "02", title: "Strategy", desc: "A tailored roadmap with clear milestones and deliverables." },
-  { num: "03", title: "Build", desc: "Agile sprints with weekly demos and continuous feedback loops." },
-  { num: "04", title: "Launch & Scale", desc: "Go live with confidence, backed by ongoing optimisation and support." },
+  {
+    num: "01",
+    title: "Schedule your call",
+    desc: "A quick, honest conversation — no pitch decks. We learn your product, your goals, and where AI can move the needle fastest.",
+  },
+  {
+    num: "02",
+    title: "Scope the engagement",
+    desc: "Pick a plan that fits where you are today. No lock-in, no long contracts — we earn your trust sprint over sprint.",
+  },
+  {
+    num: "03",
+    title: "We ship in iterations",
+    desc: "We embed, prioritise, and start moving fast. Weekly cycles, tight feedback loops, real output — not status reports.",
+  },
+  {
+    num: "04",
+    title: "Compound &amp; scale",
+    desc: "The longer we're in, the sharper we get. Every cycle we understand your product deeper and raise the bar on what we ship.",
+  },
 ];
 
 const container = {
@@ -45,17 +61,25 @@ const line = {
 };
 
 const ProcessSection = () => (
-  <section id="process" className="py-28 bg-background">
-    <div className="container mx-auto px-6">
+  <section id="process" className="relative py-32 bg-background border-t border-border">
+    <div className="max-w-7xl mx-auto px-6 md:px-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="text-center mb-16"
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-4xl mb-20"
       >
-        <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">How We Work</p>
-        <h2 className="font-display text-4xl md:text-5xl font-bold">Our Process</h2>
+        <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-6">
+          [ How we operate ]
+        </p>
+        <h2 className="font-display text-4xl md:text-6xl leading-[1.02] font-medium tracking-[-0.035em]">
+          At Ceylance, we operate as an extension of your team —{" "}
+          <span className="text-foreground/40">
+            not observers, operators. We embed, take ownership, and push your product
+            further than internal teams typically can.
+          </span>
+        </h2>
       </motion.div>
 
       <motion.div
@@ -63,45 +87,21 @@ const ProcessSection = () => (
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+        className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
       >
-        {steps.map((s, i) => (
+        {steps.map((s) => (
           <motion.div
             key={s.num}
             variants={card}
-            whileHover={{
-              y: -8,
-              scale: 1.02,
-              transition: { duration: 0.3, ease: "easeOut" },
-            }}
-            className="group relative p-8 rounded-xl glass glass-hover overflow-hidden"
+            whileHover={{ y: -6 }}
+            className="group relative p-8 rounded-3xl bg-muted/50 border border-border hover:border-primary/40 transition-all"
           >
-            {/* Animated gradient accent on hover */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            />
-
-            {/* Animated top line */}
-            <motion.div
-              variants={line}
-              className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent origin-left"
-            />
-
-            <div className="relative z-10">
-              <motion.span
-                className="font-display text-5xl font-bold text-primary/15 block group-hover:text-primary/25 transition-colors duration-300"
-                initial={{ x: -10, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 + 0.3, duration: 0.5 }}
-              >
-                {s.num}
-              </motion.span>
-              <h3 className="font-display text-xl font-semibold mt-2 mb-2 group-hover:text-primary transition-colors duration-300">
-                {s.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
-            </div>
+            <span className="font-mono text-xs tracking-widest text-foreground/40">
+              {s.num}
+            </span>
+            <h3 className="font-display text-2xl font-medium mt-8 mb-4 tracking-[-0.02em]"
+                dangerouslySetInnerHTML={{ __html: s.title }} />
+            <p className="text-sm text-foreground/60 leading-relaxed">{s.desc}</p>
           </motion.div>
         ))}
       </motion.div>
