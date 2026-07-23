@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Sparkles, Smartphone, Globe, Bot, LineChart, Workflow, ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 
 // Outcome tiles — plain English, arranged as a flat heatmap grid.
 // `heat` (0–1) drives colour intensity so the wall reads like a heatmap.
@@ -89,6 +90,93 @@ const packages = [
   },
 ];
 
+// Heatmap with cursor-following spotlight + per-tile magnetic reaction.
+const HeatmapGrid = () => {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(-9999);
+  const my = useMotionValue(-9999);
+  const smx = useSpring(mx, { stiffness: 180, damping: 22, mass: 0.4 });
+  const smy = useSpring(my, { stiffness: 180, damping: 22, mass: 0.4 });
+  const spotlight = useTransform([smx, smy], ([x, y]) =>
+    `radial-gradient(320px circle at ${x}px ${y}px, hsl(174 90% 60% / 0.35), transparent 65%)`
+  );
+
+  const onMove = (e: React.MouseEvent) => {
+    const r = wrapRef.current?.getBoundingClientRect();
+    if (!r) return;
+    mx.set(e.clientX - r.left);
+    my.set(e.clientY - r.top);
+  };
+  const onLeave = () => { mx.set(-9999); my.set(-9999); };
+
+  return (
+    <div
+      ref={wrapRef}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="relative"
+    >
+      {/* Cursor spotlight */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none mix-blend-screen z-20"
+        style={{ background: spotlight }}
+      />
+      {/* Square cells: auto-rows match column width so N×N really is a square. */}
+      <div className="relative grid grid-flow-dense grid-cols-2 md:grid-cols-8 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15 [grid-auto-rows:calc((100vw-3rem)/2)] md:[grid-auto-rows:calc((min(80rem,100vw)-5rem)/8)]">
+        {tiles.map((t, i) => {
+          const s = heatStyle(t.heat);
+          const m = t.mobileSpan ?? [1, 1];
+          return (
+            <motion.div
+              key={t.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02, zIndex: 5 }}
+              style={{ background: s.background, color: s.color }}
+              className={`group relative flex flex-col justify-between p-5 md:p-6 cursor-default overflow-hidden ${mobileSpanClass(m[0], m[1])} ${spanClass(t.span[0], t.span[1])}`}
+            >
+              {/* Corner accent line, grows on hover */}
+              <span
+                aria-hidden
+                className="absolute top-0 left-0 h-px w-6 bg-current opacity-40 origin-left scale-x-100 transition-transform duration-500 group-hover:scale-x-[6]"
+              />
+              <div className="flex items-start justify-between">
+                <span
+                  className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-60"
+                  style={{ color: s.color }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2.5}
+                  className="opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-70 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
+                />
+              </div>
+              <span
+                className="font-display leading-[1.05] tracking-[-0.025em] font-medium"
+                style={{
+                  fontSize:
+                    t.span[0] >= 3 || t.span[1] >= 2
+                      ? "clamp(1.5rem, 2.4vw, 2.25rem)"
+                      : t.span[0] === 2
+                      ? "clamp(1.125rem, 1.6vw, 1.5rem)"
+                      : "1.125rem",
+                }}
+              >
+                {t.label}
+              </span>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 const ServicesSection = () => (
   <section id="services" className="relative py-32 md:py-40 bg-secondary text-secondary-foreground overflow-hidden">
     {/* Header */}
@@ -133,45 +221,7 @@ const ServicesSection = () => (
         <span className="flex-1 h-px bg-secondary-foreground/15" />
       </div>
 
-      {/* Square cells: auto-rows match column width so N×N really is a square. */}
-      <div className="grid grid-flow-dense grid-cols-2 md:grid-cols-8 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15 [grid-auto-rows:calc((100vw-3rem)/2)] md:[grid-auto-rows:calc((min(80rem,100vw)-5rem)/8)]">
-        {tiles.map((t, i) => {
-          const s = heatStyle(t.heat);
-          const m = t.mobileSpan ?? [1, 1];
-          return (
-            <motion.div
-              key={t.label}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.04, duration: 0.4 }}
-              whileHover={{ scale: 1.015, zIndex: 5 }}
-              style={{ background: s.background, color: s.color }}
-              className={`relative flex flex-col justify-between p-5 md:p-6 cursor-default ${mobileSpanClass(m[0], m[1])} ${spanClass(t.span[0], t.span[1])}`}
-            >
-              <span
-                className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-60"
-                style={{ color: s.color }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span
-                className="font-display leading-[1.05] tracking-[-0.025em] font-medium"
-                style={{
-                  fontSize:
-                    t.span[0] >= 3 || t.span[1] >= 2
-                      ? "clamp(1.5rem, 2.4vw, 2.25rem)"
-                      : t.span[0] === 2
-                      ? "clamp(1.125rem, 1.6vw, 1.5rem)"
-                      : "1.125rem",
-                }}
-              >
-                {t.label}
-              </span>
-            </motion.div>
-          );
-        })}
-      </div>
+      <HeatmapGrid />
     </div>
 
     {/* Plain-English services grid */}
