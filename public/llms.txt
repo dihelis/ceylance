@@ -1,0 +1,19 @@
+# Ceylance
+
+> AI-native product development studio for non-technical founders and SMEs in Australia and the UK. We design, build and ship web apps, mobile apps, SaaS platforms and AI-powered workflows.
+
+Ceylance is a software consulting and product studio that turns ideas into production-grade digital products. We work as an embedded team — strategy, design, engineering and AI integration — without the jargon or agency overhead. Our focus is on fast launches, clean UX, and systems that stay easy to operate.
+
+## Pages
+
+- [Home](/): AI-native product development studio — services, process, stats and contact.
+- [About](/about): Company story, team values, case studies and why we work with non-technical founders.
+- [AI Software Development Australia](/ai-software-development-australia): Dedicated service page for AI-powered software development in Australia, including use cases, FAQs and schema markup.
+
+## Resources
+
+- [Download Company Brochure](/ceylance-brochure.pdf): PDF profile with services, process and case studies.
+
+## Optional
+
+- [Sitemap](/sitemap.xml): Machine-readable list of public routes.
