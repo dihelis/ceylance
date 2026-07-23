@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Sparkles, Smartphone, Globe, Bot, LineChart, Workflow, ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 
 // Outcome tiles — plain English, arranged as a flat heatmap grid.
 // `heat` (0–1) drives colour intensity so the wall reads like a heatmap.
