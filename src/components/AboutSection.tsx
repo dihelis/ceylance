@@ -1,13 +1,35 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
 import { CheckCircle2, Download, Eye, X } from "lucide-react";
+import AsciiPortrait from "./AsciiPortrait";
 
-const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "AU & UK", label: "Markets Served" },
-  { value: "98%", label: "Client Retention" },
-  { value: "24/7", label: "Support Coverage" },
+// Stats: parse into an animated numeric prefix + static suffix so
+// counters actually count instead of just fading in.
+const stats: { value: number | null; suffix: string; label: string; display?: string }[] = [
+  { value: 50, suffix: "+", label: "Projects Delivered" },
+  { value: null, suffix: "", label: "Markets Served", display: "AU · UK" },
+  { value: 98, suffix: "%", label: "Client Retention" },
+  { value: 24, suffix: "/7", label: "Support Coverage" },
 ];
+
+// Counter that only starts when scrolled into view.
+const Counter = ({ to, suffix }: { to: number; suffix: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-15%" });
+  const mv = useMotionValue(0);
+  const spring = useSpring(mv, { stiffness: 60, damping: 20, mass: 0.6 });
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    if (inView) mv.set(to);
+  }, [inView, to, mv]);
+
+  useEffect(() => {
+    return spring.on("change", (v) => setDisplay(Math.round(v).toString()));
+  }, [spring]);
+
+  return <span ref={ref}>{display}{suffix}</span>;
+};
 
 const reasons = [
   "Deep expertise across AI, web, mobile & automation",
@@ -71,14 +93,18 @@ const AboutSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06, duration: 0.5 }}
-                  className="bg-background hover:bg-primary/10 transition-colors p-6 md:p-8 flex flex-col justify-between min-h-[160px] md:min-h-[200px]"
+                  className="group bg-background hover:bg-primary/10 transition-colors p-6 md:p-8 flex flex-col justify-between min-h-[160px] md:min-h-[200px]"
                 >
                   <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <p className="font-display text-4xl md:text-5xl font-medium tracking-[-0.03em] text-primary mb-2">
-                      {s.value}
+                    <p className="font-display text-4xl md:text-6xl font-medium tracking-[-0.03em] text-primary mb-2 tabular-nums">
+                      {s.value !== null ? (
+                        <Counter to={s.value} suffix={s.suffix} />
+                      ) : (
+                        s.display
+                      )}
                     </p>
                     <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/60">
                       {s.label}
@@ -86,6 +112,19 @@ const AboutSection = () => {
                   </div>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Signature ASCII visual */}
+            <div className="relative mt-px border border-foreground/15 border-t-0 aspect-[16/6] md:aspect-[16/5] bg-background overflow-hidden">
+              <AsciiPortrait />
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-background via-transparent to-background" />
+              <div className="absolute bottom-4 left-6 flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/50">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                Live signal · Studio broadcasting
+              </div>
+              <div className="absolute top-4 right-6 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/40">
+                CEY // 001
+              </div>
             </div>
           </div>
 
