@@ -221,45 +221,7 @@ const ServicesSection = () => (
         <span className="flex-1 h-px bg-secondary-foreground/15" />
       </div>
 
-      {/* Square cells: auto-rows match column width so N×N really is a square. */}
-      <div className="grid grid-flow-dense grid-cols-2 md:grid-cols-8 gap-px bg-secondary-foreground/15 border border-secondary-foreground/15 [grid-auto-rows:calc((100vw-3rem)/2)] md:[grid-auto-rows:calc((min(80rem,100vw)-5rem)/8)]">
-        {tiles.map((t, i) => {
-          const s = heatStyle(t.heat);
-          const m = t.mobileSpan ?? [1, 1];
-          return (
-            <motion.div
-              key={t.label}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.04, duration: 0.4 }}
-              whileHover={{ scale: 1.015, zIndex: 5 }}
-              style={{ background: s.background, color: s.color }}
-              className={`relative flex flex-col justify-between p-5 md:p-6 cursor-default ${mobileSpanClass(m[0], m[1])} ${spanClass(t.span[0], t.span[1])}`}
-            >
-              <span
-                className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-60"
-                style={{ color: s.color }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span
-                className="font-display leading-[1.05] tracking-[-0.025em] font-medium"
-                style={{
-                  fontSize:
-                    t.span[0] >= 3 || t.span[1] >= 2
-                      ? "clamp(1.5rem, 2.4vw, 2.25rem)"
-                      : t.span[0] === 2
-                      ? "clamp(1.125rem, 1.6vw, 1.5rem)"
-                      : "1.125rem",
-                }}
-              >
-                {t.label}
-              </span>
-            </motion.div>
-          );
-        })}
-      </div>
+      <HeatmapGrid />
     </div>
 
     {/* Plain-English services grid */}
