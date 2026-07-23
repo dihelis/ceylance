@@ -85,7 +85,13 @@ const AboutSection = () => {
               <span>[ By the numbers ]</span>
               <span className="flex-1 h-px bg-foreground/15" />
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/15 border border-foreground/15">
+            <div className="relative border border-foreground/15 overflow-hidden">
+              {/* ASCII portrait as living background */}
+              <div className="absolute inset-0 pointer-events-none opacity-40">
+                <AsciiPortrait />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background/60" />
+              </div>
+              <div className="relative grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/15">
               {stats.map((s, i) => (
                 <motion.div
                   key={s.label}
@@ -93,7 +99,7 @@ const AboutSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06, duration: 0.5 }}
-                  className="group bg-background hover:bg-primary/10 transition-colors p-6 md:p-8 flex flex-col justify-between min-h-[160px] md:min-h-[200px]"
+                  className="group bg-background/70 backdrop-blur-sm hover:bg-primary/10 transition-colors p-6 md:p-8 flex flex-col justify-between min-h-[160px] md:min-h-[200px]"
                 >
                   <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground/50">
                     {String(i + 1).padStart(2, "0")}
@@ -112,20 +118,9 @@ const AboutSection = () => {
                   </div>
                 </motion.div>
               ))}
+              </div>
             </div>
 
-            {/* Signature ASCII visual */}
-            <div className="relative mt-px border border-foreground/15 border-t-0 aspect-[16/6] md:aspect-[16/5] bg-background overflow-hidden">
-              <AsciiPortrait />
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-background via-transparent to-background" />
-              <div className="absolute bottom-4 left-6 flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/50">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                Live signal · Studio broadcasting
-              </div>
-              <div className="absolute top-4 right-6 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/40">
-                CEY // 001
-              </div>
-            </div>
           </div>
 
           {/* Reasons + CTA — two flat panels */}
