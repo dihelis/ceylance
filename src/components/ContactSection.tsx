@@ -133,7 +133,7 @@ const ContactSection = () => {
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                   <Phone className="text-primary" size={18} />
                 </div>
-                <span className="text-foreground text-sm">+61 0404 173 536</span>
+                <span className="text-foreground text-sm">+61 404 173 536</span>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
