@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "ceylance-studio",
+      "version": "0.1.0",
+      "title": "Ceylance Studio"
+    },
+    "tools": [
+      {
+        "name": "get_studio_overview",
+        "title": "Get studio overview",
+        "description": "Get a summary of Ceylance: what the studio does, the markets it serves and what makes its delivery model different.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_service_packages",
+        "title": "List service packages",
+        "description": "List Ceylance's service packages by business outcome, including who each is best for, what is included and the typical delivery timeline.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_case_studies",
+        "title": "List case studies",
+        "description": "List Ceylance case studies with the industry, project summary and outcomes. Optionally filter by industry keyword (e.g. healthcare, fintech, edtech).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "industry": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Optional industry keyword to filter case studies by."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_process_steps",
+        "title": "List engagement process",
+        "description": "List the four steps of how a Ceylance engagement runs, from first call to ongoing scale.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_details",
+        "title": "Get contact details",
+        "description": "Get Ceylance's public contact details: email, phone, base city, expected response time and the company brochure link.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
