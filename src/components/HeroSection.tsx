@@ -5,15 +5,28 @@ import ShaderField from "./ShaderField";
 
 const capabilities = ["AI", "SaaS", "Mobile", "Web", "Automation"];
 
-// Split into lines, each an array of words. Words that should render in
-// the primary accent color are prefixed with "*".
-const HEADLINE: string[][] = [
-  ["Your", "*software", "&", "*AI", "partner"],
-  ["for", "*Australian", "businesses"],
-  ["and", "*founders", "with", "*ambition."],
-];
-
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+interface Market {
+  adjective: string;
+}
+
+const DEFAULT_MARKET: Market = { adjective: "Australian" };
+
+const detectMarket = async (): Promise<Market> => {
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
+    const code = data.country_code as string;
+
+    if (code === "AU") return { adjective: "Australian" };
+    if (code === "GB" || code === "IE") return { adjective: "UK" };
+    if (["AE", "SA", "QA", "BH", "KW", "OM"].includes(code)) return { adjective: "UAE" };
+  } catch {
+    // Silent fallback to default market
+  }
+  return DEFAULT_MARKET;
+};
 
 const HeroSection = () => {
   const [time, setTime] = useState("");
