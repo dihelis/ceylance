@@ -342,7 +342,7 @@ const About = () => {
                       </div>
                     </td>
                     <td className="p-5 text-right">
-                      <button className="inline-flex items-center justify-center w-10 h-10 bg-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors">
+                      <button aria-label={`Read more about ${study.title}`} className="inline-flex items-center justify-center w-10 h-10 bg-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors">
                         <ArrowUpRight size={16} strokeWidth={2.5} />
                       </button>
                     </td>
@@ -376,7 +376,7 @@ const About = () => {
                         </h4>
                       </div>
                     </div>
-                    <button className="inline-flex items-center justify-center w-10 h-10 bg-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors">
+                    <button aria-label={`Read more about ${study.title}`} className="inline-flex items-center justify-center w-10 h-10 bg-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors">
                       <ArrowUpRight size={16} strokeWidth={2.5} />
                     </button>
                   </div>
@@ -466,6 +466,7 @@ const About = () => {
                   </a>
                   <button
                     onClick={() => setShowViewer(false)}
+                    aria-label="Close"
                     className="p-1 rounded-md hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground"
                   >
                     <X size={18} />
