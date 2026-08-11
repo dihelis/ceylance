@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import SEO from "@/components/SEO";
 
 type Status = "loading" | "valid" | "already" | "invalid" | "success" | "error";
 
@@ -40,6 +41,12 @@ const Unsubscribe = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-6">
+      <SEO
+        title="Unsubscribe from Ceylance emails"
+        description="Manage your Ceylance email preferences and unsubscribe from our updates in one click. No account or login required."
+        canonical="https://ceylance.com/unsubscribe"
+        noindex
+      />
       <div className="max-w-md w-full text-center space-y-6">
         {status === "loading" && <p className="text-muted-foreground">Loading…</p>}
         {status === "valid" && (
