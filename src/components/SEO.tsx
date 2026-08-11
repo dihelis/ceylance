@@ -4,17 +4,21 @@ interface SEOProps {
   title: string;
   description: string;
   canonical: string;
+  ogType?: string;
+  noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const SEO = ({ title, description, canonical, jsonLd }: SEOProps) => (
+const SEO = ({ title, description, canonical, ogType = "website", noindex, jsonLd }: SEOProps) => (
   <Helmet>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {jsonLd && (
