@@ -30,6 +30,7 @@ const detectMarket = async (): Promise<Market> => {
 
 const HeroSection = () => {
   const [time, setTime] = useState("");
+  const [market, setMarket] = useState<Market>(DEFAULT_MARKET);
 
   useEffect(() => {
     const tick = () => {
@@ -46,8 +47,20 @@ const HeroSection = () => {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    detectMarket().then(setMarket);
+  }, []);
+
   const scrollToContact = () =>
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+
+  // Split into lines, each an array of words. Words that should render in
+  // the primary accent color are prefixed with "*".
+  const HEADLINE: string[][] = [
+    ["Your", "*software", "&", "*AI", "partner"],
+    ["for", `*${market.adjective}`, "businesses"],
+    ["and", "*founders", "with", "*ambition."],
+  ];
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-background">
