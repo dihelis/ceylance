@@ -75,7 +75,7 @@ const About = () => {
       <SEO
         title="About Ceylance — Australian Software Consulting Company"
         description="Learn about Ceylance, an Australia-based software consultancy delivering AI, SaaS, web, and mobile solutions for businesses across AU, UK, and UAE."
-        canonical="https://www.ceylance.com/about"
+        canonical="https://ceylance.com/about"
       />
       <Navbar />
 
