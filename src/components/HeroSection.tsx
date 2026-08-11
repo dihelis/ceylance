@@ -8,9 +8,9 @@ const capabilities = ["AI", "SaaS", "Mobile", "Web", "Automation"];
 // Split into lines, each an array of words. Words that should render in
 // the primary accent color are prefixed with "*".
 const HEADLINE: string[][] = [
-  ["AI-native", "product"],
-  ["studio", "for", "*SaaS,"],
-  ["mobile,", "web", "&", "AI."],
+  ["Your", "*software", "&", "*AI", "partner"],
+  ["for", "*Australian", "businesses"],
+  ["and", "*founders", "with", "*ambition."],
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -97,9 +97,9 @@ const HeroSection = () => {
             className="mt-10 max-w-xl"
           >
             <p className="text-base md:text-lg text-foreground/70 leading-relaxed">
-              We don't work for your team — we become part of it.
-              Ceylance embeds with founders across AU, UK &amp; UAE to design, build,
-              and ship intelligent products from the inside out.
+              We help Australian businesses automate operations and help
+              non-technical founders turn ideas into production-ready software
+              — without the jargon, bloated teams, or year-long timelines.
             </p>
 
             <button
