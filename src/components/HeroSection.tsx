@@ -8,9 +8,9 @@ const capabilities = ["AI", "SaaS", "Mobile", "Web", "Automation"];
 // Split into lines, each an array of words. Words that should render in
 // the primary accent color are prefixed with "*".
 const HEADLINE: string[][] = [
-  ["AI-native", "product"],
-  ["studio", "for", "*SaaS,"],
-  ["mobile,", "web", "&", "AI."],
+  ["Your", "*software", "&", "*AI", "partner"],
+  ["for", "*Australian", "businesses"],
+  ["and", "*founders", "with", "*ambition."],
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
