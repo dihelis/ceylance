@@ -11,8 +11,8 @@ const Index = () => (
   <div className="min-h-screen bg-background">
     <SEO
       title="Ceylance — AI, SaaS, Web & Mobile App Development Australia"
-      description="Ceylance is an Australia-based software consulting company helping businesses design, build, and launch AI, SaaS, web, and mobile applications. Book a free consultation today."
-      canonical="https://www.ceylance.com/"
+      description="Australia-based software consulting for AI, SaaS, web, and mobile apps. We help SMEs and founders launch production-ready products. Book a free consult."
+      canonical="https://ceylance.com/"
     />
     <Navbar />
     <HeroSection />

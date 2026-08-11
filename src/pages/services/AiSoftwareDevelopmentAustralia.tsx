@@ -50,11 +50,11 @@ const jsonLd = [
     "@type": "Service",
     name: "AI Software Development Australia",
     serviceType: "AI Software Development",
-    provider: { "@type": "Organization", name: "Ceylance", url: "https://www.ceylance.com/" },
+    provider: { "@type": "Organization", name: "Ceylance", url: "https://ceylance.com/" },
     areaServed: { "@type": "Country", name: "Australia" },
     description:
       "Custom AI software development in Australia — LLMs, machine learning, computer vision, and AI workflow automation, built and operated by an Australia-based team.",
-    url: "https://www.ceylance.com/ai-software-development-australia",
+    url: "https://ceylance.com/ai-software-development-australia",
   },
   {
     "@context": "https://schema.org",
@@ -71,9 +71,9 @@ const AiSoftwareDevelopmentAustralia = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="AI Software Development Australia | Custom AI & ML — Ceylance"
-        description="Australia-based AI software development company. Custom AI, LLM integration, machine learning, and AI automation built for Australian businesses. Book a free consultation."
-        canonical="https://www.ceylance.com/ai-software-development-australia"
+        title="AI Software Development Australia | Ceylance"
+        description="Australia-based AI development company building custom AI, LLM integrations, and machine learning for Australian businesses. Book a free consultation."
+        canonical="https://ceylance.com/ai-software-development-australia"
         jsonLd={jsonLd}
       />
       <Navbar />

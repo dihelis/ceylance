@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ceylance.com/sitemap.xml
+Sitemap: https://ceylance.com/sitemap.xml

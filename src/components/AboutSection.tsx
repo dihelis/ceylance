@@ -202,6 +202,7 @@ const AboutSection = () => {
                   </a>
                   <button
                     onClick={() => setShowViewer(false)}
+                    aria-label="Close"
                     className="p-1 rounded-md hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground"
                   >
                     <X size={18} />

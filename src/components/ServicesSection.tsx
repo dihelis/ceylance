@@ -287,6 +287,7 @@ const ServicesSection = () => (
                 <td className="p-5 text-right">
                   <a
                     href="#contact"
+                    aria-label={`Talk to us about ${p.outcome}`}
                     className="inline-flex items-center justify-center w-10 h-10 bg-secondary-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors"
                   >
                     <ArrowUpRight size={16} strokeWidth={2.5} />
@@ -317,6 +318,7 @@ const ServicesSection = () => (
                 </div>
                 <a
                   href="#contact"
+                  aria-label={`Talk to us about ${p.outcome}`}
                   className="inline-flex items-center justify-center w-10 h-10 bg-secondary-foreground/10 hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
                   <ArrowUpRight size={16} strokeWidth={2.5} />
